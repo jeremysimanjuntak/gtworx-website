@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — GT WORX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 160px 0 80px; background: #000;
+    border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%);
+  }
+  .page-hero-grid {
+    position: absolute; inset: 0; opacity: 0.025;
+    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-hero-inner { position: relative; z-index: 1; }
+  .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
+  .page-hero-eyebrow {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.18em; color: #CC1111;
+  }
+  .page-hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: #fff; line-height: 0.95; margin-bottom: 20px;
+  }
+  .page-hero-sub { font-size: 15px; color: #555; line-height: 1.8; max-width: 540px; }
+  .page-hero-bottom-bar { height: 3px; background: #CC1111; }
+
+  /* ── SERVICES DETAIL ── */
+  .services-categories { padding: 80px 0; background: #000; }
+  .cat-block { margin-bottom: 72px; }
+  .cat-block:last-child { margin-bottom: 0; }
+  .cat-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.18em; margin-bottom: 36px;
+  }
+  .cat-label-red { color: #CC1111; }
+  .cat-label-chrome { color: #888; }
+  .cat-label::before { content: ''; display: block; width: 20px; height: 2px; background: currentColor; }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  /* ── SERVICE CARD (full detail) ── */
+  .svc-card {
+    background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px;
+    overflow: hidden; cursor: pointer;
+    transition: border-color 220ms, box-shadow 220ms, transform 220ms;
+    display: flex; flex-direction: column;
+  }
+  .svc-card:hover {
+    border-color: #CC1111;
+    box-shadow: 0 8px 32px rgba(204,17,17,0.12);
+    transform: translateY(-2px);
+  }
+  .svc-card-accent { height: 2px; background: #CC1111; opacity: 0; transition: opacity 220ms; }
+  .svc-card:hover .svc-card-accent { opacity: 1; }
+  .svc-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+  .svc-icon-wrap {
+    width: 48px; height: 48px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  }
+  .svc-icon-red { background: rgba(204,17,17,0.1); }
+  .svc-icon-chrome { background: rgba(200,200,200,0.05); }
+  .svc-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 3px; margin-bottom: 14px;
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  }
+  .svc-title {
+    font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 600;
+    color: #fff; margin-bottom: 10px;
+  }
+  .svc-desc { font-size: 13.5px; color: #666; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+  .svc-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .svc-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12.5px; color: #888;
+  }
+  .svc-features li::before { content: ''; width: 12px; height: 2px; background: #CC1111; flex-shrink: 0; }
+  .svc-price {
+    display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px;
+    padding-top: 18px; border-top: 1px solid #1A1A1A;
+  }
+  .svc-price-from { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #444; }
+  .svc-price-num {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 800;
+    color: #fff; letter-spacing: 0.02em; line-height: 1;
+  }
+  .svc-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: auto;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #CC1111; text-decoration: none; transition: gap 200ms;
+  }
+  .svc-card:hover .svc-link { gap: 10px; }
+
+  /* ── PRICING TABLE ── */
+  .pricing-section { padding: 80px 0; background: #050505; border-top: 1px solid #111; }
+  .pricing-table {
+    width: 100%; border-collapse: collapse;
+    border: 1px solid #1A1A1A; border-radius: 6px; overflow: hidden;
+  }
+  .pricing-table thead th {
+    background: #0D0D0D; padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em; color: #555;
+    text-align: left; border-bottom: 1px solid #1A1A1A;
+  }
+  .pricing-table tbody tr { border-bottom: 1px solid #111; transition: background 200ms; }
+  .pricing-table tbody tr:last-child { border-bottom: none; }
+  .pricing-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .pricing-table td { padding: 16px 20px; font-size: 13.5px; color: #777; }
+  .pricing-table td:first-child { color: #ccc; font-weight: 500; }
+  .pricing-table td:last-child { color: #CC1111; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; }
+  .pt-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 3px; margin-left: 8px;
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    background: rgba(204,17,17,0.12); color: #CC1111;
+  }
+
+  @media (max-width: 900px) {
+    .cat-grid { grid-template-columns: 1fr; }
+    .pricing-table { font-size: 12px; }
+    .pricing-table td { padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link active" data-page="services">Services</a>
+      <a href="projects.html" class="nav-link" data-page="projects">Projects</a>
+      <a href="facility.html" class="nav-link" data-page="facility">Facility</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+      <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      <a href="book.html" class="nav-link" data-page="book">Book</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone"><i data-lucide="phone" style="width:13px;height:13px;"></i><span>0800 GT WORX</span></div>
+      <a href="book.html" class="btn-book">Book Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="services.html" class="mobile-link">Services</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="facility.html" class="mobile-link">Facility</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="book.html" class="mobile-link">Book</a>
+    <a href="book.html" class="mobile-cta">Book an Appointment</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="page-hero-pre">
+      <span class="page-hero-rule"></span>
+      <span class="page-hero-eyebrow">GT WORX</span>
+    </div>
+    <h1 class="page-hero-title">Our<br><span style="color:#CC1111;">Services</span></h1>
+    <p class="page-hero-sub">From everyday MOTs to full Stage 2 builds — honest pricing, no guesswork, done right.</p>
+  </div>
+  <div class="page-hero-bottom-bar"></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-categories">
+  <div class="container">
+
+    <!-- Performance -->
+    <div class="cat-block">
+      <div class="cat-label cat-label-red">Performance Services</div>
+      <div class="cat-grid">
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-red"><i data-lucide="zap" style="width:24px;height:24px;color:#CC1111;"></i></div>
+            <span class="svc-badge badge-red">Performance</span>
+            <div class="svc-title">ECU Remapping</div>
+            <p class="svc-desc">Unlock your engine's true potential. We calibrate every map on our in-house rolling road — Stage 1, Stage 2, and custom builds.</p>
+            <ul class="svc-features">
+              <li>Stage 1 — no hardware mods required</li>
+              <li>Stage 2 — matched to your upgraded hardware</li>
+              <li>Custom maps for track and race builds</li>
+              <li>Before/after dyno runs included</li>
+              <li>Most petrol and diesel vehicles supported</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£250</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-red"><i data-lucide="gauge" style="width:24px;height:24px;color:#CC1111;"></i></div>
+            <span class="svc-badge badge-red">Performance</span>
+            <div class="svc-title">Performance Upgrades</div>
+            <p class="svc-desc">Exhausts, suspension, brakes, intercoolers, induction kits. We spec and fit performance parts properly — no cut corners.</p>
+            <ul class="svc-features">
+              <li>Stainless exhaust systems — cat-back and decat</li>
+              <li>Coilovers and suspension geometry</li>
+              <li>Big brake kits and brake upgrades</li>
+              <li>Induction kits and intercoolers</li>
+              <li>Manufacturer-matched part sourcing</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£150</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-red"><i data-lucide="activity" style="width:24px;height:24px;color:#CC1111;"></i></div>
+            <span class="svc-badge badge-red">Performance</span>
+            <div class="svc-title">Rolling Road Dyno</div>
+            <p class="svc-desc">In-house rolling road for accurate power and torque measurement. Used for every remap we produce — available as a standalone session too.</p>
+            <ul class="svc-features">
+              <li>Accurate bhp and torque figures</li>
+              <li>Before/after remap comparison runs</li>
+              <li>Health check under load</li>
+              <li>Results report included</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£80</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Everyday -->
+    <div class="cat-block">
+      <div class="cat-label cat-label-chrome">Everyday Services</div>
+      <div class="cat-grid">
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="shield-check" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
+            <span class="svc-badge badge-chrome">Everyday</span>
+            <div class="svc-title">MOT Testing</div>
+            <p class="svc-desc">Fast, honest MOT with no surprise advisories. DVSA-approved testing station. Book your slot online in minutes.</p>
+            <ul class="svc-features">
+              <li>Class 4 and Class 7 vehicles</li>
+              <li>Same-day results</li>
+              <li>Advisory report with every test</li>
+              <li>Free retest within 10 working days</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£54.85</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="wrench" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
+            <span class="svc-badge badge-chrome">Everyday</span>
+            <div class="svc-title">Servicing</div>
+            <p class="svc-desc">Full and interim servicing for all makes and models. Fixed price, genuine parts, no drama. We'll tell you what it needs — and what it doesn't.</p>
+            <ul class="svc-features">
+              <li>Interim service — oil, filter, checks</li>
+              <li>Full service — complete inspection</li>
+              <li>Manufacturer-schedule servicing</li>
+              <li>Service history stamp provided</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£99</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="cpu" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
+            <span class="svc-badge badge-chrome">Everyday</span>
+            <div class="svc-title">Diagnostics</div>
+            <p class="svc-desc">Advanced multi-brand diagnostics to find the issue fast. Live data, fault code reading and clear-up, system analysis. No guesswork.</p>
+            <ul class="svc-features">
+              <li>Multi-brand diagnostic equipment</li>
+              <li>Fault code read and clear</li>
+              <li>Live data analysis</li>
+              <li>Written fault report</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">From</span>
+              <span class="svc-price-num">£55</span>
+            </div>
+            <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="wrench" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
+            <span class="svc-badge badge-chrome">Everyday</span>
+            <div class="svc-title">General Repairs</div>
+            <p class="svc-desc">Clutch, brakes, suspension, tyres, exhausts — if it's broken, we'll fix it right. Transparent pricing, no hidden labour costs.</p>
+            <ul class="svc-features">
+              <li>Clutch replacement and flywheel</li>
+              <li>Brake pads, discs, calipers</li>
+              <li>Suspension arms and bushes</li>
+              <li>All work guaranteed</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">POA</span>
+              <span class="svc-price-num" style="font-size:1.5rem;color:#555;">Quote on request</span>
+            </div>
+            <a href="contact.html" class="svc-link">Get a Quote <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING TABLE -->
+<section class="pricing-section">
+  <div class="container">
+    <div style="margin-bottom:40px;">
+      <span class="section-label-line"></span>
+      <span class="section-eyebrow">Transparent Pricing</span>
+      <h2 class="section-title">Common Service Prices</h2>
+    </div>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Details</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MOT Test <span class="pt-badge">Everyday</span></td>
+          <td>Class 4 vehicles · DVSA maximum rate</td>
+          <td>£54.85</td>
+        </tr>
+        <tr>
+          <td>Interim Service</td>
+          <td>Oil, filter, fluid top-ups, visual checks</td>
+          <td>From £99</td>
+        </tr>
+        <tr>
+          <td>Full Service</td>
+          <td>Full manufacturer-schedule service</td>
+          <td>From £149</td>
+        </tr>
+        <tr>
+          <td>Diagnostics</td>
+          <td>Fault code read, live data, written report</td>
+          <td>From £55</td>
+        </tr>
+        <tr>
+          <td>Stage 1 Remap <span class="pt-badge">Performance</span></td>
+          <td>ECU tune, dyno run, before/after results</td>
+          <td>From £250</td>
+        </tr>
+        <tr>
+          <td>Stage 2 Remap</td>
+          <td>Hardware-matched ECU map, full dyno session</td>
+          <td>From £350</td>
+        </tr>
+        <tr>
+          <td>Rolling Road Session</td>
+          <td>Standalone dyno session, power and torque figures</td>
+          <td>From £80</td>
+        </tr>
+        <tr>
+          <td>Performance Exhaust (Cat-back)</td>
+          <td>Stainless system, supplied and fitted</td>
+          <td>POA</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#333;margin-top:16px;font-style:italic;">All prices include VAT where applicable. Final quotes subject to vehicle inspection.</p>
+  </div>
+</section>
+
+<!-- BOOKING BANNER -->
+<section class="booking-section">
+  <div class="container">
+    <div class="booking-inner">
+      <span class="booking-eyebrow">Ready to Book?</span>
+      <h2 class="booking-title">Your Car.<br>Our Expertise.</h2>
+      <p class="booking-sub">Tell us what you need and we'll come back to you within 24 hours.</p>
+      <div class="booking-ctas">
+        <a href="book.html" class="btn-primary"><i data-lucide="calendar" style="width:15px;height:15px;"></i>Book an Appointment</a>
+        <a href="#" class="btn-whatsapp"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-accent"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
+          <a href="#" class="social-pill">FB</a>
+          <a href="#" class="social-pill">YT</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="facility.html" class="footer-link">Facility</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="book.html" class="footer-link">Book Now</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href="services.html" class="footer-link">ECU Remapping</a>
+          <a href="services.html" class="footer-link">MOT Testing</a>
+          <a href="services.html" class="footer-link">Servicing</a>
+          <a href="services.html" class="footer-link">Performance Upgrades</a>
+          <a href="services.html" class="footer-link">Diagnostics</a>
+          <a href="services.html" class="footer-link">General Repairs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-row"><i data-lucide="phone" style="width:14px;height:14px;"></i><span>0800 GT WORX</span></div>
+        <div class="footer-contact-row"><i data-lucide="mail" style="width:14px;height:14px;"></i><span>info@gtworx.co.uk</span></div>
+        <div class="footer-contact-row"><i data-lucide="map-pin" style="width:14px;height:14px;"></i><span>Location TBC</span></div>
+        <div class="footer-hours">
+          <div class="footer-hours-title">Opening Hours</div>
+          <div class="footer-hours-row"><span>Mon – Fri</span><span>8:00am – 6:00pm</span></div>
+          <div class="footer-hours-row"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+          <div class="footer-hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid #0F0F0F;">
+    <div class="footer-bottom">
+      <span>© 2026 GT WORX. All rights reserved.</span>
+      <span class="footer-sep">·</span>
+      <a href="#" class="footer-legal">Privacy Policy</a>
+      <span class="footer-sep">·</span>
+      <span class="footer-disclaimer">Performance tuning for off-road use only where applicable</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+</body>
+</html>

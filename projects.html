@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — GT WORX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .page-hero { padding: 160px 0 80px; background: #000; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%); }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.025; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+  .page-hero-inner { position: relative; z-index: 1; }
+  .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
+  .page-hero-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #CC1111; }
+  .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 0.95; margin-bottom: 20px; }
+  .page-hero-sub { font-size: 15px; color: #555; line-height: 1.8; max-width: 540px; }
+  .page-hero-bottom-bar { height: 3px; background: #CC1111; }
+
+  /* FILTER BAR */
+  .filter-bar { background: #050505; border-bottom: 1px solid #1A1A1A; padding: 0; position: sticky; top: 72px; z-index: 50; }
+  .filter-bar-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; gap: 8px; height: 56px; }
+  .filter-btn {
+    padding: 6px 18px; border-radius: 4px; border: 1px solid #1A1A1A; background: transparent;
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em; color: #555; cursor: pointer;
+    transition: all 200ms;
+  }
+  .filter-btn:hover { border-color: #333; color: #999; }
+  .filter-btn.active { background: #CC1111; border-color: #CC1111; color: #fff; }
+
+  /* PROJECTS GRID */
+  .projects-section { padding: 64px 0; background: #000; }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  /* LARGE FEATURED CARD */
+  .project-card-featured {
+    grid-column: span 2;
+    background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px; overflow: hidden; cursor: pointer;
+    transition: border-color 220ms, box-shadow 220ms, transform 220ms; display: flex; flex-direction: column;
+  }
+  .project-card-featured:hover { border-color: #CC1111; box-shadow: 0 8px 32px rgba(204,17,17,0.14); transform: translateY(-2px); }
+  .project-card-featured .project-img { padding-bottom: 46%; }
+
+  /* STANDARD CARD */
+  .project-card {
+    background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px; overflow: hidden; cursor: pointer;
+    transition: border-color 220ms, box-shadow 220ms, transform 220ms; display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: #CC1111; box-shadow: 0 8px 32px rgba(204,17,17,0.14); transform: translateY(-2px); }
+  .project-img { position: relative; width: 100%; padding-bottom: 60%; overflow: hidden; }
+  .project-img-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .project-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.04); user-select: none; line-height: 1; }
+  .project-img-badge { position: absolute; top: 12px; left: 12px; background: #CC1111; color: #fff; padding: 3px 9px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 3px; }
+  .project-overlay { position: absolute; inset: 0; background: rgba(204,17,17,0.15); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 220ms; }
+  .project-card:hover .project-overlay,
+  .project-card-featured:hover .project-overlay { opacity: 1; }
+  .project-overlay-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #fff; }
+  .project-body { padding: 20px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+  .project-car { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin-bottom: 5px; }
+  .project-car span { font-weight: 400; color: #444; }
+  .project-work { font-size: 12.5px; color: #555; line-height: 1.55; margin-bottom: 14px; flex: 1; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .project-tag { padding: 3px 9px; background: #111; border: 1px solid #1E1E1E; border-radius: 3px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #555; }
+  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #CC1111; text-decoration: none; transition: gap 200ms; margin-top: auto; }
+  .project-card:hover .project-link,
+  .project-card-featured:hover .project-link { gap: 9px; }
+
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card-featured { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link active">Projects</a>
+      <a href="facility.html" class="nav-link">Facility</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="book.html" class="nav-link">Book</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone"><i data-lucide="phone" style="width:13px;height:13px;"></i><span>0800 GT WORX</span></div>
+      <a href="book.html" class="btn-book">Book Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="services.html" class="mobile-link">Services</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="facility.html" class="mobile-link">Facility</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="book.html" class="mobile-link">Book</a>
+    <a href="book.html" class="mobile-cta">Book an Appointment</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="page-hero-pre"><span class="page-hero-rule"></span><span class="page-hero-eyebrow">GT WORX</span></div>
+    <h1 class="page-hero-title">Featured<br><span style="color:#CC1111;">Projects</span></h1>
+    <p class="page-hero-sub">Real cars. Real results. Every build here came through our workshop.</p>
+  </div>
+  <div class="page-hero-bottom-bar"></div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('performance', this)">Performance</button>
+    <button class="filter-btn" onclick="filterProjects('remap', this)">Remaps</button>
+    <button class="filter-btn" onclick="filterProjects('service', this)">Service &amp; Repair</button>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-section">
+  <div class="container">
+    <div class="projects-grid" id="projects-grid">
+
+      <div class="project-card-featured" data-category="performance remap">
+        <div class="project-img" style="background:#140a0a;">
+          <div class="project-img-inner"><div class="project-placeholder">M3</div></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">BMW <span>M3 E92</span></div>
+          <div class="project-work">Full Stage 2 build — custom ECU map, decat, KW coilovers, big brake kit. Before/after dyno showing 42bhp gain.</div>
+          <div class="project-tags">
+            <span class="project-tag">Stage 2 Remap</span>
+            <span class="project-tag">Decat</span>
+            <span class="project-tag">KW Coilovers</span>
+            <span class="project-tag">Big Brake Kit</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance remap">
+        <div class="project-img" style="background:#0a1414;">
+          <div class="project-img-inner"><div class="project-placeholder">GTR</div></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Nissan <span>GT-R R35</span></div>
+          <div class="project-work">Custom tune, intercooler upgrade, full stainless exhaust.</div>
+          <div class="project-tags">
+            <span class="project-tag">Custom Tune</span>
+            <span class="project-tag">Intercooler</span>
+            <span class="project-tag">Exhaust</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance remap">
+        <div class="project-img" style="background:#10100a;">
+          <div class="project-img-inner"><div class="project-placeholder">ST</div></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Ford <span>Focus ST MK3</span></div>
+          <div class="project-work">Stage 1 remap, performance exhaust, cold air intake.</div>
+          <div class="project-tags">
+            <span class="project-tag">Stage 1 Remap</span>
+            <span class="project-tag">Exhaust</span>
+            <span class="project-tag">Intake</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance remap">
+        <div class="project-img" style="background:#0a0a14;">
+          <div class="project-img-inner"><div class="project-placeholder">RS3</div></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Audi <span>RS3 8V</span></div>
+          <div class="project-work">Stage 2 remap, downpipe, intake. 430bhp on pump fuel.</div>
+          <div class="project-tags">
+            <span class="project-tag">Stage 2 Remap</span>
+            <span class="project-tag">Downpipe</span>
+            <span class="project-tag">Intake</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance">
+        <div class="project-img" style="background:#140e0a;">
+          <div class="project-img-inner"><div class="project-placeholder">GR</div></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Toyota <span>GR Yaris</span></div>
+          <div class="project-work">Stage 1 remap, Bilstein coilovers, big brake upgrade.</div>
+          <div class="project-tags">
+            <span class="project-tag">Stage 1 Remap</span>
+            <span class="project-tag">Coilovers</span>
+            <span class="project-tag">Brakes</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="service">
+        <div class="project-img" style="background:#0d0d0d;">
+          <div class="project-img-inner"><div class="project-placeholder">911</div></div>
+          <span class="project-img-badge" style="background:#444;color:#C8C8C8;">Service</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Porsche <span>911 Carrera</span></div>
+          <div class="project-work">Full manufacturer service, IMS bearing inspection, gearbox service.</div>
+          <div class="project-tags">
+            <span class="project-tag">Full Service</span>
+            <span class="project-tag">IMS Check</span>
+            <span class="project-tag">Gearbox</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING BANNER -->
+<section class="booking-section">
+  <div class="container">
+    <div class="booking-inner">
+      <span class="booking-eyebrow">Your Build Starts Here</span>
+      <h2 class="booking-title">Ready to Get<br>Started?</h2>
+      <p class="booking-sub">Tell us about your car and what you're looking to achieve. We'll put together the right plan.</p>
+      <div class="booking-ctas">
+        <a href="book.html" class="btn-primary"><i data-lucide="calendar" style="width:15px;height:15px;"></i>Book an Appointment</a>
+        <a href="#" class="btn-whatsapp"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-accent"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
+          <a href="#" class="social-pill">FB</a>
+          <a href="#" class="social-pill">YT</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="facility.html" class="footer-link">Facility</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="book.html" class="footer-link">Book Now</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href="services.html" class="footer-link">ECU Remapping</a>
+          <a href="services.html" class="footer-link">MOT Testing</a>
+          <a href="services.html" class="footer-link">Servicing</a>
+          <a href="services.html" class="footer-link">Performance Upgrades</a>
+          <a href="services.html" class="footer-link">Diagnostics</a>
+          <a href="services.html" class="footer-link">General Repairs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-row"><i data-lucide="phone" style="width:14px;height:14px;"></i><span>0800 GT WORX</span></div>
+        <div class="footer-contact-row"><i data-lucide="mail" style="width:14px;height:14px;"></i><span>info@gtworx.co.uk</span></div>
+        <div class="footer-contact-row"><i data-lucide="map-pin" style="width:14px;height:14px;"></i><span>Location TBC</span></div>
+        <div class="footer-hours">
+          <div class="footer-hours-title">Opening Hours</div>
+          <div class="footer-hours-row"><span>Mon – Fri</span><span>8:00am – 6:00pm</span></div>
+          <div class="footer-hours-row"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+          <div class="footer-hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid #0F0F0F;">
+    <div class="footer-bottom">
+      <span>© 2026 GT WORX. All rights reserved.</span>
+      <span class="footer-sep">·</span>
+      <a href="#" class="footer-legal">Privacy Policy</a>
+      <span class="footer-sep">·</span>
+      <span class="footer-disclaimer">Performance tuning for off-road use only where applicable</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  function filterProjects(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('[data-category]').forEach(card => {
+      if (cat === 'all' || card.dataset.category.includes(cat)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>
