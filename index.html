@@ -27,10 +27,10 @@
   .nav.scrolled { background: #000; border-bottom-color: #2A2A2A; }
   .nav-inner {
     max-width: 1280px; margin: 0 auto; padding: 0 32px;
-    height: 72px; display: flex; align-items: center; gap: 40px;
+    height: 120px; display: flex; align-items: center; gap: 40px;
   }
   .nav-logo { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; }
-  .nav-logo img { height: 38px; object-fit: contain; }
+  .nav-logo img { height: 96px; object-fit: contain; display: block; }
   .nav-links { display: flex; align-items: center; gap: 32px; flex: 1; justify-content: center; }
   .nav-link {
     font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
@@ -83,12 +83,13 @@
   /* ── HERO ── */
   .hero {
     position: relative; min-height: 100vh;
-    background: #080808; display: flex; align-items: flex-end;
+    background: #080808 url('assets/banner-home.jpg') center/cover no-repeat;
+    display: flex; align-items: flex-end;
     overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(40,0,0,0.5) 0%, #000 65%);
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.68) 50%, rgba(0,0,0,0.5) 100%);
   }
   /* Subtle grid texture */
   .hero-grid {
@@ -109,7 +110,7 @@
   }
   .hero-content {
     position: relative; z-index: 2; width: 100%;
-    padding-bottom: 88px; padding-top: 180px;
+    padding-bottom: 24px; padding-top: 180px;
   }
   .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
   .hero-pre {
@@ -415,11 +416,39 @@
 
   /* ── REVIEWS ── */
   .reviews-section { background: #050505; border-top: 1px solid #111; }
-  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .reviews-marquee {
+    position: relative;
+    /* fade edges so cards drift in/out gracefully */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+    overflow: hidden;
+    /* allow track to spill outside the page container */
+    margin: 0 calc(50% - 50vw);
+    padding: 4px 0;
+  }
+  .reviews-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: reviews-scroll 90s linear infinite;
+    /* user requested left-to-right motion: cards drift rightward */
+    animation-direction: reverse;
+  }
+  .reviews-marquee:hover .reviews-track { animation-play-state: paused; }
+  @keyframes reviews-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-track { animation: none; }
+    .reviews-marquee { overflow-x: auto; }
+  }
   .review-card {
     background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px;
     padding: 28px; display: flex; flex-direction: column; gap: 16px;
     transition: border-color 220ms;
+    flex: 0 0 380px;        /* fixed card width — keeps text legible */
+    min-height: 240px;
   }
   .review-card:hover { border-color: #2A2A2A; }
   .review-stars { display: flex; gap: 3px; }
@@ -518,7 +547,7 @@
     .nav-links, .nav-phone { display: none; }
     .hamburger { display: flex; }
     .hero-h1 { font-size: clamp(3.5rem, 14vw, 6rem); }
-    .services-grid, .projects-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .services-grid, .projects-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr 1fr; }
     .perf-inner { grid-template-columns: 1fr; }
     .perf-visual { display: none; }
@@ -532,10 +561,35 @@
     .container { padding: 0 20px; }
     .nav-inner { padding: 0 20px; }
     section { padding: 72px 0; }
-    .services-grid, .projects-grid, .reviews-grid, .why-grid { grid-template-columns: 1fr; }
+    .services-grid, .projects-grid, .why-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
     .hero-stats { gap: 24px; }
     .booking-ctas { flex-direction: column; align-items: center; }
+  }
+
+  /* ── BRANDS MARQUEE ── */
+  .brands-section { background: #050505; border-top: 1px solid #111; border-bottom: 1px solid #111; padding: 0; }
+  .brands-strip-row { display: flex; align-items: center; gap: 32px; height: 72px; }
+  .brands-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #555; white-space: nowrap; flex-shrink: 0; }
+  .brands-rule { display: none; }
+  .brands-marquee { position: relative; overflow: hidden; flex: 1 1 auto; min-width: 0;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+  }
+  .brands-track { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 6px; width: max-content; animation: brands-scroll 70s linear infinite; }
+  @keyframes brands-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } .brands-marquee { overflow-x: auto; } }
+  .brand-cell { flex: 0 0 130px; height: 56px; display: inline-flex; align-items: center; justify-content: center; position: relative; padding: 0 10px; }
+  .brand-logo { max-width: 100%; max-height: 30px; width: auto; height: auto; object-fit: contain; opacity: 0.55; transition: opacity 220ms; filter: brightness(0) invert(1); }
+  .brand-logo.brand-logo-svg { filter: none; display: inline-flex; align-items: center; justify-content: center; }
+  .brand-logo.brand-logo-svg svg { max-width: 100%; max-height: 30px; width: auto; height: 30px; }
+  .brand-cell:hover .brand-logo { opacity: 1; }
+  .brand-fallback { display: none; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; opacity: 0.55; white-space: nowrap; transition: opacity 220ms; }
+  .brand-cell:hover .brand-fallback { opacity: 1; }
+  @media (max-width: 640px) {
+    .brands-strip-row { gap: 18px; height: 60px; }
+    .brand-cell { flex: 0 0 100px; height: 48px; }
+    .brand-logo { max-height: 24px; }
   }
 </style>
 </head>
@@ -545,7 +599,7 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo-banner.jpeg" alt="GT WORX">
+      <img src="assets/logo-banner-clean.jpeg" alt="GT WORX">
     </a>
     <nav class="nav-links">
       <a href="index.html" class="nav-link active">Home</a>
@@ -599,8 +653,7 @@
         <span class="hero-h1-red">Perform.</span>
       </h1>
       <p class="hero-sub">
-        ECU remapping, performance upgrades, MOT testing and servicing.
-        No hidden costs. Just honest work from people who care about cars.
+        ECU remapping, custom exhaust fabrication, performance upgrades, MOT testing, servicing and diagnostics. Independent workshop with in-house TIG-welding and multi-brand diagnostic equipment.
       </p>
       <div class="hero-ctas">
         <a href="book.html" class="btn-primary">
@@ -626,13 +679,16 @@
           <span class="hero-stat-label">Testing Station</span>
         </div>
         <div class="hero-stat">
-          <span class="hero-stat-num">5★</span>
+          <span class="hero-stat-num">4.9</span>
           <span class="hero-stat-label">Google Rating</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ══════════════════════════════════════ BRANDS WE SERVICE ══════════════════════════════════════ -->
+<div id="brands-strip"></div>
 
 <!-- ══════════════════════════════════════ TRUST BAR ══════════════════════════════════════ -->
 <div class="trust-bar">
@@ -652,16 +708,16 @@
       </div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon-wrap"><i data-lucide="gauge" style="width:18px;height:18px;color:#CC1111;"></i></div>
+      <div class="trust-icon-wrap"><i data-lucide="flame" style="width:18px;height:18px;color:#CC1111;"></i></div>
       <div>
-        <div class="trust-stat">Dyno</div>
-        <div class="trust-label">In-House Rolling Road</div>
+        <div class="trust-stat">Exhaust</div>
+        <div class="trust-label">Custom Fabrication</div>
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon-wrap"><i data-lucide="star" style="width:18px;height:18px;color:#CC1111;"></i></div>
       <div>
-        <div class="trust-stat">5.0 ★</div>
+        <div class="trust-stat">4.9 ★</div>
         <div class="trust-label">Google Reviews</div>
       </div>
     </div>
@@ -685,7 +741,7 @@
           <div class="service-icon-wrap red"><i data-lucide="zap" style="width:22px;height:22px;color:#CC1111;"></i></div>
           <span class="service-badge badge-red">Performance</span>
           <div class="service-card-title">ECU Remapping</div>
-          <p class="service-card-desc">Unlock your engine's full potential. Stage 1, Stage 2 and custom maps for most vehicles. Real gains, safely calibrated.</p>
+          <p class="service-card-desc">Stage 1, Stage 2 and custom ECU maps for most petrol and diesel vehicles. Safe, road-tested calibration.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -697,7 +753,7 @@
           <div class="service-icon-wrap red"><i data-lucide="gauge" style="width:22px;height:22px;color:#CC1111;"></i></div>
           <span class="service-badge badge-red">Performance</span>
           <div class="service-card-title">Performance Upgrades</div>
-          <p class="service-card-desc">Exhausts, suspension, brakes, induction kits, intercoolers. We spec and fit performance parts properly — no cut corners.</p>
+          <p class="service-card-desc">Exhausts, suspension, brakes, intercoolers and induction kits. Hardware spec and fitting for road and track builds.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -709,7 +765,7 @@
           <div class="service-icon-wrap chrome"><i data-lucide="shield-check" style="width:22px;height:22px;color:#C8C8C8;"></i></div>
           <span class="service-badge badge-chrome">Everyday</span>
           <div class="service-card-title">MOT Testing</div>
-          <p class="service-card-desc">Fast, honest MOT with no surprise advisories. Book your slot online. DVSA-approved testing station.</p>
+          <p class="service-card-desc">DVSA-approved testing station for Class 4 and Class 7 vehicles. Book your slot online.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -721,7 +777,7 @@
           <div class="service-icon-wrap chrome"><i data-lucide="wrench" style="width:22px;height:22px;color:#C8C8C8;"></i></div>
           <span class="service-badge badge-chrome">Everyday</span>
           <div class="service-card-title">Servicing</div>
-          <p class="service-card-desc">Full and interim servicing for all makes and models. Fixed price, genuine parts, no drama.</p>
+          <p class="service-card-desc">Interim and full servicing across all makes. Manufacturer schedules followed, genuine or OEM-equivalent parts.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -733,7 +789,7 @@
           <div class="service-icon-wrap chrome"><i data-lucide="cpu" style="width:22px;height:22px;color:#C8C8C8;"></i></div>
           <span class="service-badge badge-chrome">Everyday</span>
           <div class="service-card-title">Diagnostics</div>
-          <p class="service-card-desc">Advanced diagnostics to find the issue fast. Multi-brand systems, live data analysis. No guesswork, no wasted money.</p>
+          <p class="service-card-desc">Multi-brand diagnostic equipment with live data, fault code reading and system analysis. Available as a standalone session.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -745,7 +801,7 @@
           <div class="service-icon-wrap chrome"><i data-lucide="wrench" style="width:22px;height:22px;color:#C8C8C8;"></i></div>
           <span class="service-badge badge-chrome">Everyday</span>
           <div class="service-card-title">General Repairs</div>
-          <p class="service-card-desc">Clutch, brakes, suspension, exhausts, tyres — if it's broken, we'll fix it right. Transparent pricing, every time.</p>
+          <p class="service-card-desc">Clutch, brakes, suspension, exhausts, tyres and general mechanical repairs across all makes.</p>
           <a href="services.html" class="service-card-link">Learn More <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></a>
         </div>
       </div>
@@ -765,17 +821,17 @@
         <span class="perf-tag">Stage 1</span>
         <span class="perf-tag">Stage 2</span>
         <span class="perf-tag">Custom Map</span>
-        <span class="perf-tag">Rolling Road</span>
+        <span class="perf-tag">Custom Exhaust</span>
       </div>
       <h2 class="perf-title">Remap.<br><span>Unleash.</span><br>Dominate.</h2>
       <p class="perf-body">
-        Our ECU remapping service extracts the full potential your manufacturer left on the table. Every map is custom-calibrated on our in-house rolling road — not a generic file upload.
+        Our ECU remapping service extracts the full potential your manufacturer left on the table. Every map is custom-calibrated for your specific vehicle and supporting hardware — not a generic file upload.
       </p>
       <ul class="perf-list">
         <li>Stage 1 — bolt-on gains, no hardware mods required</li>
         <li>Stage 2 — matched to your upgraded hardware</li>
         <li>Custom maps for track, race, and flex-fuel builds</li>
-        <li>Before/after dyno runs included</li>
+        <li>Pair with custom exhaust fabrication for a complete build</li>
       </ul>
       <a href="book.html" class="btn-primary" style="align-self:flex-start;">
         Book a Remap
@@ -874,28 +930,28 @@
     <div class="section-head" style="margin-bottom:40px;">
       <span class="section-label-line"></span>
       <span class="section-eyebrow">Why Us</span>
-      <h2 class="section-title">The GT WORX Difference</h2>
+      <h2 class="section-title">How We Work</h2>
     </div>
     <div class="why-grid">
       <div class="why-item">
         <div class="why-num">01</div>
-        <div class="why-title">No Hidden Costs</div>
-        <p class="why-body">We quote it. We charge it. That's it. No surprise extras, no inflated part markups. Fixed pricing across all services.</p>
+        <div class="why-title">Itemised Quotes</div>
+        <p class="why-body">Quotes break parts and labour out separately before any work begins. Any additional work found during the job is quoted before it's started.</p>
       </div>
       <div class="why-item">
         <div class="why-num">02</div>
-        <div class="why-title">Enthusiast-Led</div>
-        <p class="why-body">We're car people first. Every job is done the way we'd want it done on our own cars — because we actually care.</p>
+        <div class="why-title">Performance Specialism</div>
+        <p class="why-body">Stage 1 and Stage 2 builds, custom mapping, and supporting hardware are a regular part of the workshop's output — not a sideline.</p>
       </div>
       <div class="why-item">
         <div class="why-num">03</div>
-        <div class="why-title">In-House Dyno</div>
-        <p class="why-body">We measure before and after. Every remap is calibrated on our own rolling road, not guesswork from a laptop.</p>
+        <div class="why-title">Custom Exhaust Fab</div>
+        <p class="why-body">TIG-welded in mild steel or stainless on-site. Resonator deletes, backbox deletes, custom midpipes and full bespoke systems.</p>
       </div>
       <div class="why-item">
         <div class="why-num">04</div>
-        <div class="why-title">All Makes Welcome</div>
-        <p class="why-body">From daily drivers to full-spec track builds. Hot hatches, performance saloons, sports cars — we work on them all.</p>
+        <div class="why-title">All Makes</div>
+        <p class="why-body">Petrol and diesel vehicles across most makes — see the brands strip above for what we routinely work on.</p>
       </div>
     </div>
   </div>
@@ -910,56 +966,75 @@
         <span class="section-eyebrow">Customer Reviews</span>
         <h2 class="section-title">What They're Saying</h2>
       </div>
-      <a href="about.html" class="link-all">See All Reviews <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+      <a href="https://www.google.com/maps/place/GT+WORX/@51.5414236,-0.2917711,17z/data=!4m17!1m8!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!2sGT+WORX!8m2!3d51.5413908!4d-0.2918456!10e5!16s%2Fg%2F11rchhblc6!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!8m2!3d51.5413908!4d-0.2918456!9m1!1b1!16s%2Fg%2F11rchhblc6" target="_blank" rel="noopener" class="link-all">See All Reviews <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
     </div>
-    <div class="reviews-grid">
-
-      <div class="review-card">
-        <div class="review-stars">
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-        </div>
-        <p class="review-quote">"GT WORX remapped my Golf R and the difference is night and day. Honest pricing, no surprises, and they actually know what they're doing."</p>
-        <div>
-          <div class="review-author">James H.</div>
-          <div class="review-google">Google Review</div>
-        </div>
+    <div class="reviews-marquee" aria-label="Customer reviews carousel">
+      <div class="reviews-track" id="reviews-track">
+        <!-- track is populated by JS from the review data below to avoid markup duplication -->
       </div>
-
-      <div class="review-card">
-        <div class="review-stars">
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-        </div>
-        <p class="review-quote">"Best garage I've used in years. Booked the MOT online, dropped it off, got it back same day. No drama — passed first time."</p>
-        <div>
-          <div class="review-author">Sarah M.</div>
-          <div class="review-google">Google Review</div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-stars">
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-          <i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>
-        </div>
-        <p class="review-quote">"Stage 2 on my M3 — these guys are proper car people. They'll tell you exactly what you need and nothing you don't. Already recommending them."</p>
-        <div>
-          <div class="review-author">Ryan T.</div>
-          <div class="review-google">Google Review</div>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Review data — single source of truth, duplicated into the track by JS for seamless loop -->
+    <script type="application/json" id="reviews-data">
+    [
+      {
+        "quote": "Can't recommend GT WORX enough. Top-quality work every single time with genuinely friendly and honest service — I've taken all my cars there over the years because I trust them completely.",
+        "author": "Ridge V."
+      },
+      {
+        "quote": "Excellent job from the guys at GT WORX. Came for a downpipe installation on my BMW 135i — Mauro was very knowledgeable and took the extra steps to make sure the install was done to a high standard. Trustworthy guys who deserve our business.",
+        "author": "Jeremy S."
+      },
+      {
+        "quote": "Range Rover SVR — diagnosed worn wishbones quickly, sourced parts same-day, and had me back on the road within the hour. Honest, knowledgeable, and determined to help. You won't be disappointed.",
+        "author": "Osman A."
+      },
+      {
+        "quote": "Came in for a repair and got looked after by Weis — extremely helpful and kind, explained everything in detail. 10/10 experience, would highly recommend.",
+        "author": "Rita S."
+      },
+      {
+        "quote": "From the moment I arrived they were professional, honest, and extremely knowledgeable. Fair price, finished faster than expected, and the quality of the repair was excellent. It's rare to find a mechanic you can truly trust.",
+        "author": "Mihaiela M."
+      },
+      {
+        "quote": "Called last minute to get welding done on my exhaust. Owner said they were busy but to pop down and he'd sort something out. Great folks — reliable, professional, and excellent service.",
+        "author": "Kay"
+      },
+      {
+        "quote": "MOT and full service. Pulled up on time, cracked on, no nonsense extras. Told me what needed doing and got it sorted. Clean work, respectful, knows his stuff. Definitely using them again.",
+        "author": "Kyle M."
+      },
+      {
+        "quote": "Such an amazing workshop. Mechanics know their stuff — went there to fit a downpipe and even though it was a tough job they sorted it. Not many garages you can trust these days, but you can 100% trust them.",
+        "author": "AceRider LMC"
+      },
+      {
+        "quote": "Had the timing belt replaced at GT WORX — top-notch experience. The mechanics were friendly and professional, explained exactly what the job involved, and the final cost was very reasonable.",
+        "author": "Veronica P."
+      },
+      {
+        "quote": "Another tech hadn't fixed a problem correctly — GT WORX noticed it right away. The work is great and you get what you pay for. Excellent service, very polite, outstanding customer service.",
+        "author": "Jeffrey A."
+      },
+      {
+        "quote": "Got my exhaust, brakes and service done by the afternoon. Very good service — highly recommend these guys. Will be returning soon.",
+        "author": "Florin D."
+      },
+      {
+        "quote": "Needed a last-minute MOT and they sorted me out and booked me in the very next day. I've been using them for a good three years now — honestly great people. Highly recommend.",
+        "author": "Talha B."
+      },
+      {
+        "quote": "After a bad repair elsewhere on my Mini Cooper, Weis at GT WORX had it sorted within a day at a very reasonable price. Kept me updated throughout. Speed, customer service, value for money and expertise.",
+        "author": "Moukaram E."
+      },
+      {
+        "quote": "Mercedes C180 with a cracked cat — leak-tested it, welded it shut, added extra support, and had me out within the hour. Charged me a third of what other garages quoted. 110% can recommend.",
+        "author": "Kev (MSTG)"
+      }
+    ]
+    </script>
   </div>
 </section>
 
@@ -969,7 +1044,7 @@
     <div class="booking-inner">
       <span class="booking-eyebrow">Ready to Book?</span>
       <h2 class="booking-title">Your Car.<br>Our Expertise.</h2>
-      <p class="booking-sub">Tell us what you need and we'll come back to you within 24 hours. No obligation, no hard sell.</p>
+      <p class="booking-sub">Tell us what you need and we'll come back to you within 24 hours.</p>
       <div class="booking-ctas">
         <a href="mailto:info@gtworx.co.uk" class="btn-primary">
           <i data-lucide="calendar" style="width:15px;height:15px;"></i>
@@ -992,7 +1067,7 @@
 
       <!-- Brand col -->
       <div>
-        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
@@ -1066,7 +1141,32 @@
 </footer>
 
 <script>
-  // Init Lucide icons
+  // ── Populate reviews marquee from JSON data (duplicated for seamless loop) ──
+  (function buildReviewsMarquee() {
+    const dataEl = document.getElementById('reviews-data');
+    const track = document.getElementById('reviews-track');
+    if (!dataEl || !track) return;
+    let reviews;
+    try { reviews = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    const star = '<i data-lucide="star" style="width:14px;height:14px;color:#CC1111;fill:#CC1111;"></i>';
+    const cardHTML = (r) => `
+      <div class="review-card">
+        <div class="review-stars">${star.repeat(5)}</div>
+        <p class="review-quote">&ldquo;${r.quote}&rdquo;</p>
+        <div>
+          <div class="review-author">${r.author}</div>
+          <div class="review-google">Google Review</div>
+        </div>
+      </div>`;
+    // Render the set twice so translateX(-50%) lands on an identical frame
+    const html = reviews.map(cardHTML).join('') + reviews.map(r => cardHTML(r)).join('');
+    track.innerHTML = html;
+    // mark the duplicates as decorative for screen readers
+    const cards = track.querySelectorAll('.review-card');
+    for (let i = reviews.length; i < cards.length; i++) cards[i].setAttribute('aria-hidden', 'true');
+  })();
+
+  // Init Lucide icons (after marquee is populated so injected stars also render)
   lucide.createIcons();
 
   // Nav scroll state
@@ -1092,5 +1192,6 @@
   document.querySelectorAll('[data-lucide]').forEach(() => lucide.createIcons());
 </script>
 
+<script src="assets/brands-strip.js"></script>
 </body>
 </html>

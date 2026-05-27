@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="shared.css">
 <style>
-  .page-hero { padding: 160px 0 80px; background: #000; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
-  .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%); }
-  .page-hero-grid { position: absolute; inset: 0; opacity: 0.025; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+  .page-hero { padding: 160px 0 24px; background: #000 url('assets/banner-about.jpg') center/cover no-repeat; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%); z-index: 0; }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
   .page-hero-inner { position: relative; z-index: 1; }
   .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
   .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
@@ -83,7 +83,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-clean.jpeg" alt="GT WORX"></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link">Services</a>
@@ -124,6 +124,9 @@
   <div class="page-hero-bottom-bar"></div>
 </div>
 
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
+
 <!-- STORY -->
 <section class="story-section">
   <div class="container">
@@ -140,12 +143,8 @@
         <span class="section-label-line"></span>
         <span class="section-eyebrow">Our Story</span>
         <h2 class="story-title">Built on<br><span>Passion.</span></h2>
-        <p class="story-body">GT WORX was founded by car enthusiasts who were frustrated with garages that didn't understand performance cars — or worse, didn't care. We built a workshop around the idea that every car deserves to be treated properly, and every customer deserves a straight answer.</p>
-        <p class="story-body">Over 10 years later, we're one of the UK's most trusted independent performance workshops. We do everything from everyday MOTs to full Stage 2 builds — and we approach every job with the same standards.</p>
-        <div class="story-quote">
-          <p>"Your car, our expertise. No hidden costs. No waffle. Just the job done right."</p>
-          <cite>— GT WORX</cite>
-        </div>
+        <p class="story-body">GT WORX is an independent workshop specialising in performance modifications alongside everyday servicing and MOT work. The workshop was set up around custom exhaust fabrication and multi-brand diagnostic capability.</p>
+        <p class="story-body">Day-to-day work covers ECU remapping, full and interim servicing, MOT testing, diagnostics and general mechanical repairs. Performance builds — from Stage 1 maps to full Stage 2 hardware — make up a regular share of the workshop's output.</p>
         <a href="contact.html" class="btn-primary"><i data-lucide="arrow-right" style="width:15px;height:15px;"></i>Get in Touch</a>
       </div>
     </div>
@@ -158,28 +157,28 @@
     <div class="section-head">
       <span class="section-label-line"></span>
       <span class="section-eyebrow">What We Stand For</span>
-      <h2 class="section-title">Our Values</h2>
+      <h2 class="section-title">How We Work</h2>
     </div>
     <div class="values-grid">
       <div class="value-card">
         <div class="value-num">01</div>
-        <div class="value-title">Honesty, Always</div>
-        <p class="value-body">We'll tell you what your car needs — and what it doesn't. No upselling, no made-up advisories, no inflated quotes. If it doesn't need doing, we'll say so.</p>
+        <div class="value-title">Itemised Quotes</div>
+        <p class="value-body">Parts and labour are quoted separately before any work starts. Additional work found during a job is quoted and authorised before it's carried out.</p>
       </div>
       <div class="value-card">
         <div class="value-num">02</div>
-        <div class="value-title">Quality Without Compromise</div>
-        <p class="value-body">We don't cut corners. From the parts we source to the time we spend setting up a remap, the standard is the same whether it's an MOT or a full build.</p>
+        <div class="value-title">In-House Capability</div>
+        <p class="value-body">Diagnostics, exhaust fabrication, welding and most mechanical work is handled on-site. Vehicles are rarely sent to third parties.</p>
       </div>
       <div class="value-card">
         <div class="value-num">03</div>
-        <div class="value-title">Enthusiast-Led</div>
-        <p class="value-body">We're car people. We understand what you're trying to achieve — and we have the knowledge to get you there. This isn't just a job to us.</p>
+        <div class="value-title">Performance Specialism</div>
+        <p class="value-body">Stage 1, Stage 2 and custom ECU mapping are a regular part of the workshop's output. Supporting hardware — exhausts, intercoolers, brakes — is specified and fitted in-house.</p>
       </div>
       <div class="value-card">
         <div class="value-num">04</div>
-        <div class="value-title">Accessible Expertise</div>
-        <p class="value-body">Performance knowledge shouldn't be locked behind dealership prices. We bring specialist skill to every customer, regardless of budget or vehicle.</p>
+        <div class="value-title">All Makes</div>
+        <p class="value-body">Workshop services cover petrol and diesel vehicles across most makes — see the brands strip above for what we routinely work on.</p>
       </div>
     </div>
   </div>
@@ -211,8 +210,8 @@
       </div>
       <div class="cred-item">
         <div class="cred-icon"><i data-lucide="star" style="width:18px;height:18px;color:#CC1111;"></i></div>
-        <div class="cred-title">5-Star Rated</div>
-        <p class="cred-body">Consistently rated 5 stars on Google by our customers. We let the work speak.</p>
+        <div class="cred-title">4.9★ Rated</div>
+        <p class="cred-body">Average 4.9 stars on Google across customer reviews. See the carousel on the home page for examples.</p>
       </div>
     </div>
   </div>
@@ -227,7 +226,7 @@
         <span class="section-eyebrow">Google Reviews</span>
         <h2 class="section-title">What They Say</h2>
       </div>
-      <a href="#" class="link-all">All Reviews <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+      <a href="https://www.google.com/maps/place/GT+WORX/@51.5414236,-0.2917711,17z/data=!4m17!1m8!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!2sGT+WORX!8m2!3d51.5413908!4d-0.2918456!10e5!16s%2Fg%2F11rchhblc6!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!8m2!3d51.5413908!4d-0.2918456!9m1!1b1!16s%2Fg%2F11rchhblc6" target="_blank" rel="noopener" class="link-all">All Reviews <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
     </div>
     <div class="reviews-grid">
       <div class="review-card">
@@ -238,8 +237,8 @@
           <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
           <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
         </div>
-        <p class="review-quote">"GT WORX remapped my Golf R and the difference is night and day. Honest pricing, no surprises, and they actually know what they're doing."</p>
-        <div><div class="review-author">James H.</div><div class="review-source">Google Review</div></div>
+        <p class="review-quote">"Can't recommend GT WORX enough. Top-quality work every single time with genuinely friendly and honest service — I've taken all my cars there over the years because I trust them completely."</p>
+        <div><div class="review-author">Ridge V.</div><div class="review-source">Google Review</div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">
@@ -273,7 +272,7 @@
     <div class="booking-inner">
       <span class="booking-eyebrow">Work With Us</span>
       <h2 class="booking-title">Let's Talk<br>About Your Car.</h2>
-      <p class="booking-sub">No obligation, no hard sell. Just a straight conversation about what your car needs.</p>
+      <p class="booking-sub">Tell us what your car needs and we'll come back within 24 hours.</p>
       <div class="booking-ctas">
         <a href="book.html" class="btn-primary"><i data-lucide="calendar" style="width:15px;height:15px;"></i>Book an Appointment</a>
         <a href="#" class="btn-whatsapp"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
@@ -288,7 +287,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
@@ -340,5 +339,6 @@
   document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('open'); });
   window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40); });
 </script>
+<script src="assets/brands-strip.js"></script>
 </body>
 </html>

@@ -12,18 +12,21 @@
 <style>
   /* ── PAGE HERO ── */
   .page-hero {
-    padding: 160px 0 80px; background: #000;
+    padding: 160px 0 24px;
+    background: #000 url('assets/banner-services.jpg') center/cover no-repeat;
     border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden;
   }
   .page-hero-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%);
+    background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%);
+    z-index: 0;
   }
   .page-hero-grid {
-    position: absolute; inset: 0; opacity: 0.025;
+    position: absolute; inset: 0; opacity: 0.04;
     background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
     background-size: 60px 60px;
+    z-index: 0;
   }
   .page-hero-inner { position: relative; z-index: 1; }
   .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
@@ -59,6 +62,7 @@
   .svc-card {
     background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px;
     overflow: hidden; cursor: pointer;
+    position: relative;
     transition: border-color 220ms, box-shadow 220ms, transform 220ms;
     display: flex; flex-direction: column;
   }
@@ -67,7 +71,21 @@
     box-shadow: 0 8px 32px rgba(204,17,17,0.12);
     transform: translateY(-2px);
   }
-  .svc-card-accent { height: 2px; background: #CC1111; opacity: 0; transition: opacity 220ms; }
+  .svc-card-accent { height: 2px; background: #CC1111; opacity: 0; transition: opacity 220ms; position: relative; z-index: 2; }
+
+  /* Background-image variant for service cards */
+  .svc-card.has-bg { background-size: cover; background-position: center; }
+  .svc-card.has-bg .svc-card-body {
+    background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.92) 35%, rgba(13,13,13,0.97) 70%, #0D0D0D 100%);
+    position: relative; z-index: 1;
+  }
+  .svc-bg-ecu { background-image: url('assets/svc-ecu.jpg'); }
+  .svc-bg-perf { background-image: url('assets/svc-perf.jpg'); }
+  .svc-bg-exhaust { background-image: url('assets/svc-exhaust.jpg'); }
+  .svc-bg-mot { background-image: url('assets/svc-mot.jpg'); }
+  .svc-bg-service { background-image: url('assets/svc-service.jpg'); }
+  .svc-bg-diag { background-image: url('assets/svc-diag.jpg'); }
+  .svc-bg-repair { background-image: url('assets/svc-repair.jpg'); }
   .svc-card:hover .svc-card-accent { opacity: 1; }
   .svc-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
   .svc-icon-wrap {
@@ -143,7 +161,7 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-clean.jpeg" alt="GT WORX"></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link active" data-page="services">Services</a>
@@ -183,10 +201,13 @@
       <span class="page-hero-eyebrow">GT WORX</span>
     </div>
     <h1 class="page-hero-title">Our<br><span style="color:#CC1111;">Services</span></h1>
-    <p class="page-hero-sub">From everyday MOTs to full Stage 2 builds — honest pricing, no guesswork, done right.</p>
+    <p class="page-hero-sub">From MOTs and routine servicing to ECU remapping and full Stage 2 builds. All work itemised and quoted in advance.</p>
   </div>
   <div class="page-hero-bottom-bar"></div>
 </div>
+
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
 
 <!-- SERVICES -->
 <section class="services-categories">
@@ -197,18 +218,18 @@
       <div class="cat-label cat-label-red">Performance Services</div>
       <div class="cat-grid">
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-ecu">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-red"><i data-lucide="zap" style="width:24px;height:24px;color:#CC1111;"></i></div>
             <span class="svc-badge badge-red">Performance</span>
             <div class="svc-title">ECU Remapping</div>
-            <p class="svc-desc">Unlock your engine's true potential. We calibrate every map on our in-house rolling road — Stage 1, Stage 2, and custom builds.</p>
+            <p class="svc-desc">Stage 1, Stage 2 and custom maps for most petrol and diesel vehicles. Safe, road-tested calibration with full diagnostic logging.</p>
             <ul class="svc-features">
               <li>Stage 1 — no hardware mods required</li>
               <li>Stage 2 — matched to your upgraded hardware</li>
               <li>Custom maps for track and race builds</li>
-              <li>Before/after dyno runs included</li>
+              <li>Pre- and post-map diagnostic logging</li>
               <li>Most petrol and diesel vehicles supported</li>
             </ul>
             <div class="svc-price">
@@ -219,13 +240,13 @@
           </div>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-perf">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-red"><i data-lucide="gauge" style="width:24px;height:24px;color:#CC1111;"></i></div>
             <span class="svc-badge badge-red">Performance</span>
             <div class="svc-title">Performance Upgrades</div>
-            <p class="svc-desc">Exhausts, suspension, brakes, intercoolers, induction kits. We spec and fit performance parts properly — no cut corners.</p>
+            <p class="svc-desc">Exhausts, suspension, brakes, intercoolers and induction kits. Hardware spec and fitting for road and track builds.</p>
             <ul class="svc-features">
               <li>Stainless exhaust systems — cat-back and decat</li>
               <li>Coilovers and suspension geometry</li>
@@ -241,22 +262,22 @@
           </div>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-exhaust">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
-            <div class="svc-icon-wrap svc-icon-red"><i data-lucide="activity" style="width:24px;height:24px;color:#CC1111;"></i></div>
+            <div class="svc-icon-wrap svc-icon-red"><i data-lucide="flame" style="width:24px;height:24px;color:#CC1111;"></i></div>
             <span class="svc-badge badge-red">Performance</span>
-            <div class="svc-title">Rolling Road Dyno</div>
-            <p class="svc-desc">In-house rolling road for accurate power and torque measurement. Used for every remap we produce — available as a standalone session too.</p>
+            <div class="svc-title">Custom Exhaust Fabrication</div>
+            <p class="svc-desc">Resonator deletes, backbox deletes, custom midpipes and full bespoke systems. TIG-welded in-house in mild steel or stainless.</p>
             <ul class="svc-features">
-              <li>Accurate bhp and torque figures</li>
-              <li>Before/after remap comparison runs</li>
-              <li>Health check under load</li>
-              <li>Results report included</li>
+              <li>Resonator and backbox deletes</li>
+              <li>Custom midpipes and Y-pipes</li>
+              <li>Full bespoke systems from scratch</li>
+              <li>Mild steel and stainless welding</li>
             </ul>
             <div class="svc-price">
               <span class="svc-price-from">From</span>
-              <span class="svc-price-num">£80</span>
+              <span class="svc-price-num" style="font-size:1.5rem;color:#555;">Quote on request</span>
             </div>
             <a href="book.html" class="svc-link">Book Now <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
           </div>
@@ -270,13 +291,13 @@
       <div class="cat-label cat-label-chrome">Everyday Services</div>
       <div class="cat-grid">
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-mot">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="shield-check" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
             <span class="svc-badge badge-chrome">Everyday</span>
             <div class="svc-title">MOT Testing</div>
-            <p class="svc-desc">Fast, honest MOT with no surprise advisories. DVSA-approved testing station. Book your slot online in minutes.</p>
+            <p class="svc-desc">DVSA-approved testing station for Class 4 and Class 7 vehicles. Book your slot online.</p>
             <ul class="svc-features">
               <li>Class 4 and Class 7 vehicles</li>
               <li>Same-day results</li>
@@ -291,13 +312,13 @@
           </div>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-service">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="wrench" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
             <span class="svc-badge badge-chrome">Everyday</span>
             <div class="svc-title">Servicing</div>
-            <p class="svc-desc">Full and interim servicing for all makes and models. Fixed price, genuine parts, no drama. We'll tell you what it needs — and what it doesn't.</p>
+            <p class="svc-desc">Interim and full servicing across all makes. Manufacturer schedules followed, genuine or OEM-equivalent parts.</p>
             <ul class="svc-features">
               <li>Interim service — oil, filter, checks</li>
               <li>Full service — complete inspection</li>
@@ -312,13 +333,13 @@
           </div>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-diag">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="cpu" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
             <span class="svc-badge badge-chrome">Everyday</span>
             <div class="svc-title">Diagnostics</div>
-            <p class="svc-desc">Advanced multi-brand diagnostics to find the issue fast. Live data, fault code reading and clear-up, system analysis. No guesswork.</p>
+            <p class="svc-desc">Multi-brand diagnostic equipment with live data, fault code reading and system analysis. Available as a standalone session.</p>
             <ul class="svc-features">
               <li>Multi-brand diagnostic equipment</li>
               <li>Fault code read and clear</li>
@@ -333,13 +354,13 @@
           </div>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card has-bg svc-bg-repair">
           <div class="svc-card-accent"></div>
           <div class="svc-card-body">
             <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="wrench" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
             <span class="svc-badge badge-chrome">Everyday</span>
             <div class="svc-title">General Repairs</div>
-            <p class="svc-desc">Clutch, brakes, suspension, tyres, exhausts — if it's broken, we'll fix it right. Transparent pricing, no hidden labour costs.</p>
+            <p class="svc-desc">Clutch, brakes, suspension, tyres, exhausts and general mechanical repairs across all makes.</p>
             <ul class="svc-features">
               <li>Clutch replacement and flywheel</li>
               <li>Brake pads, discs, calipers</li>
@@ -398,18 +419,18 @@
         </tr>
         <tr>
           <td>Stage 1 Remap <span class="pt-badge">Performance</span></td>
-          <td>ECU tune, dyno run, before/after results</td>
+          <td>ECU tune, custom calibration, full diagnostic logs</td>
           <td>From £250</td>
         </tr>
         <tr>
           <td>Stage 2 Remap</td>
-          <td>Hardware-matched ECU map, full dyno session</td>
+          <td>Hardware-matched ECU map for upgraded intake/exhaust/intercooler</td>
           <td>From £350</td>
         </tr>
         <tr>
-          <td>Rolling Road Session</td>
-          <td>Standalone dyno session, power and torque figures</td>
-          <td>From £80</td>
+          <td>Custom Exhaust Fabrication <span class="pt-badge">Performance</span></td>
+          <td>Resonator/backbox deletes, custom midpipes, bespoke systems</td>
+          <td>Quote on request</td>
         </tr>
         <tr>
           <td>Performance Exhaust (Cat-back)</td>
@@ -443,7 +464,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
@@ -507,5 +528,6 @@
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
   });
 </script>
+<script src="assets/brands-strip.js"></script>
 </body>
 </html>

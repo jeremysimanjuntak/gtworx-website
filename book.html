@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="shared.css">
 <style>
   /* PAGE HERO */
-  .page-hero { padding: 160px 0 80px; background: #000; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
-  .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%); }
-  .page-hero-grid { position: absolute; inset: 0; opacity: 0.025; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+  .page-hero { padding: 160px 0 24px; background: #000 url('assets/banner-book.jpg') center/cover no-repeat; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%); z-index: 0; }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
   .page-hero-inner { position: relative; z-index: 1; }
   .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
   .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
@@ -24,13 +24,20 @@
 
   /* BOOKING SECTION */
   .book-section { padding: 64px 0 96px; background: #000; }
-  .book-grid { display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: flex-start; }
 
-  /* LEFT COLUMN — INFO */
-  .book-side { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
-  .info-block { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 24px; }
-  .info-block-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #CC1111; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  /* TOP INFO ROW (full width, two columns) */
+  .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+  .info-block { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 28px 32px; }
+  .info-block-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #CC1111; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
   .info-block-title::before { content: ''; display: block; width: 14px; height: 1px; background: #CC1111; }
+
+  /* How It Works — horizontal layout on wide */
+  .steps-horizontal { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .steps-horizontal .step-row { padding: 0; border: none; flex-direction: column; gap: 10px; }
+
+  /* Rather Talk First — horizontal layout on wide */
+  .alt-horizontal { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .alt-horizontal .alt-row { padding: 0; border: none; flex-direction: column; gap: 10px; }
 
   /* HOW IT WORKS STEPS */
   .step-row { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid #111; }
@@ -50,15 +57,7 @@
   .alt-value a { color: #ddd; text-decoration: none; transition: color 200ms; }
   .alt-value a:hover { color: #CC1111; }
 
-  /* HOURS COMPACT */
-  .hours-compact { display: flex; flex-direction: column; gap: 6px; }
-  .hours-compact-row { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; }
-  .hours-compact-row span:first-child { color: #777; }
-  .hours-compact-row span:last-child { color: #555; }
-  .hours-compact-row.today span:first-child { color: #CC1111; font-weight: 600; }
-  .hours-compact-row.today span:last-child { color: #CC1111; }
-
-  /* RIGHT COLUMN — WIDGET */
+  /* WIDGET CONTAINER (full width) */
   .book-main { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; overflow: hidden; }
   .book-main-head { padding: 28px 32px; border-bottom: 1px solid #1A1A1A; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .book-main-head-text { display: flex; flex-direction: column; gap: 4px; }
@@ -69,8 +68,8 @@
   @keyframes livepulse { 0%,100% { box-shadow: 0 0 0 3px rgba(204,17,17,0.18);} 50% { box-shadow: 0 0 0 6px rgba(204,17,17,0); } }
 
   /* IFRAME WRAPPER */
-  .widget-frame-wrap { position: relative; background: #fff; min-height: 760px; }
-  .widget-frame { width: 100%; min-height: 760px; height: 100%; border: 0; display: block; }
+  .widget-frame-wrap { position: relative; background: #fff; min-height: 820px; }
+  .widget-frame { width: 100%; min-height: 820px; height: 100%; border: 0; display: block; }
   .widget-loading { position: absolute; inset: 0; background: #0A0A0A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; pointer-events: none; transition: opacity 300ms; }
   .widget-loading.hidden { opacity: 0; }
   .widget-spinner { width: 32px; height: 32px; border: 2px solid #1A1A1A; border-top-color: #CC1111; border-radius: 50%; animation: spin 800ms linear infinite; }
@@ -114,9 +113,11 @@
   .trust-item-sub { font-size: 11px; color: #555; }
 
   @media (max-width: 980px) {
-    .book-grid { grid-template-columns: 1fr; gap: 24px; }
-    .book-side { position: static; }
-    .widget-frame-wrap, .widget-frame { min-height: 680px; }
+    .info-row { grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+    .steps-horizontal, .alt-horizontal { grid-template-columns: 1fr; gap: 12px; }
+    .steps-horizontal .step-row, .alt-horizontal .alt-row { flex-direction: row; gap: 14px; padding: 10px 0; border-bottom: 1px solid #111; }
+    .steps-horizontal .step-row:last-child, .alt-horizontal .alt-row:last-child { border-bottom: none; }
+    .widget-frame-wrap, .widget-frame { min-height: 720px; }
   }
   @media (max-width: 600px) {
     .book-main-head { padding: 22px; flex-direction: column; align-items: flex-start; }
@@ -130,7 +131,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-clean.jpeg" alt="GT WORX"></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link">Services</a>
@@ -167,46 +168,23 @@
   <div class="container page-hero-inner">
     <div class="page-hero-pre"><span class="page-hero-rule"></span><span class="page-hero-eyebrow">Online Booking</span></div>
     <h1 class="page-hero-title">Book<br><span style="color:#CC1111;">Your Slot</span></h1>
-    <p class="page-hero-sub">Pick a date and time below. Instant confirmation — no waiting on email replies. MOTs, servicing, remaps, diagnostics, the lot.</p>
+    <p class="page-hero-sub">Pick a date and time below for MOTs, servicing, ECU remapping, diagnostics and general repairs. Instant confirmation.</p>
   </div>
   <div class="page-hero-bottom-bar"></div>
 </div>
 
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
+
 <!-- BOOKING -->
 <section class="book-section">
   <div class="container">
-    <div class="book-grid">
+    <!-- TOP INFO ROW: Rather Talk First + How It Works, side by side, full width -->
+    <div class="info-row">
 
-      <!-- SIDE INFO -->
-      <aside class="book-side">
-
-        <div class="info-block">
-          <div class="info-block-title">How It Works</div>
-          <div class="step-row">
-            <div class="step-num">1</div>
-            <div>
-              <div class="step-text-title">Pick a service</div>
-              <div class="step-text-sub">Choose what you need — MOT, service, remap, diagnostics.</div>
-            </div>
-          </div>
-          <div class="step-row">
-            <div class="step-num">2</div>
-            <div>
-              <div class="step-text-title">Choose a slot</div>
-              <div class="step-text-sub">Live availability. Pick the day and time that suits you.</div>
-            </div>
-          </div>
-          <div class="step-row">
-            <div class="step-num">3</div>
-            <div>
-              <div class="step-text-title">Get confirmation</div>
-              <div class="step-text-sub">Instant email + reminder before your appointment.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="info-block">
-          <div class="info-block-title">Rather Talk First?</div>
+      <div class="info-block">
+        <div class="info-block-title">Rather Talk First?</div>
+        <div class="alt-horizontal">
           <div class="alt-row">
             <div class="alt-icon"><i data-lucide="phone" style="width:14px;height:14px;color:#CC1111;"></i></div>
             <div>
@@ -229,24 +207,39 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="info-block">
-          <div class="info-block-title">Opening Hours</div>
-          <div class="hours-compact">
-            <div class="hours-compact-row"><span>Monday</span><span>8am – 6pm</span></div>
-            <div class="hours-compact-row"><span>Tuesday</span><span>8am – 6pm</span></div>
-            <div class="hours-compact-row"><span>Wednesday</span><span>8am – 6pm</span></div>
-            <div class="hours-compact-row"><span>Thursday</span><span>8am – 6pm</span></div>
-            <div class="hours-compact-row"><span>Friday</span><span>8am – 6pm</span></div>
-            <div class="hours-compact-row"><span>Saturday</span><span>9am – 4pm</span></div>
-            <div class="hours-compact-row"><span>Sunday</span><span>Closed</span></div>
+      <div class="info-block">
+        <div class="info-block-title">How It Works</div>
+        <div class="steps-horizontal">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-text-title">Pick a service</div>
+              <div class="step-text-sub">Choose what you need — MOT, service, remap, diagnostics.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-text-title">Choose a slot</div>
+              <div class="step-text-sub">Live availability. Pick the day and time that suits you.</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-text-title">Get confirmation</div>
+              <div class="step-text-sub">Instant email + reminder before your appointment.</div>
+            </div>
           </div>
         </div>
+      </div>
 
-      </aside>
+    </div>
 
-      <!-- WIDGET MAIN -->
-      <div class="book-main">
+    <!-- WIDGET MAIN (full width) -->
+    <div class="book-main">
 
         <div class="book-main-head">
           <div class="book-main-head-text">
@@ -292,7 +285,6 @@
 
       </div>
 
-    </div>
   </div>
 </section>
 
@@ -324,7 +316,7 @@
       <div class="trust-item">
         <div class="trust-item-icon"><i data-lucide="star" style="width:16px;height:16px;color:#CC1111;"></i></div>
         <div>
-          <div class="trust-item-title">5★ Rated</div>
+          <div class="trust-item-title">4.9★ Rated</div>
           <div class="trust-item-sub">Trusted by enthusiasts</div>
         </div>
       </div>
@@ -338,7 +330,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
@@ -403,5 +395,6 @@
     if (el) el.classList.add('hidden');
   }, 6000);
 </script>
+<script src="assets/brands-strip.js"></script>
 </body>
 </html>

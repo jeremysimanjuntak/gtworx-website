@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="shared.css">
 <style>
-  .page-hero { padding: 160px 0 80px; background: #000; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
-  .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(204,17,17,0.05) 0%, transparent 60%); }
-  .page-hero-grid { position: absolute; inset: 0; opacity: 0.025; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+  .page-hero { padding: 160px 0 24px; background: #000 url('assets/banner-contact.jpg') center/cover no-repeat; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%); z-index: 0; }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
   .page-hero-inner { position: relative; z-index: 1; }
   .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
   .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
@@ -91,7 +91,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="assets/logo-banner.jpeg" alt="GT WORX"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-clean.jpeg" alt="GT WORX"></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link">Services</a>
@@ -127,10 +127,13 @@
   <div class="container page-hero-inner">
     <div class="page-hero-pre"><span class="page-hero-rule"></span><span class="page-hero-eyebrow">GT WORX</span></div>
     <h1 class="page-hero-title">Book an<br><span style="color:#CC1111;">Appointment</span></h1>
-    <p class="page-hero-sub">Fill in the form and we'll confirm your slot within 24 hours. No obligation, no hard sell.</p>
+    <p class="page-hero-sub">Fill in the form and we'll confirm your slot within 24 hours.</p>
   </div>
   <div class="page-hero-bottom-bar"></div>
 </div>
+
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
 
 <!-- CONTACT -->
 <section class="contact-section">
@@ -237,7 +240,7 @@
                   <option>ECU Remapping — Stage 1</option>
                   <option>ECU Remapping — Stage 2</option>
                   <option>Custom / Track Map</option>
-                  <option>Rolling Road Session</option>
+                  <option>Custom Exhaust Fabrication</option>
                   <option>Performance Upgrade</option>
                 </optgroup>
                 <optgroup label="Everyday">
@@ -278,7 +281,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-banner.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
@@ -346,5 +349,6 @@
     success.classList.add('show');
   }
 </script>
+<script src="assets/brands-strip.js"></script>
 </body>
 </html>
