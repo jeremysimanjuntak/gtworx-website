@@ -561,11 +561,14 @@
   .footer-disclaimer { font-style: italic; color: #222; }
 
   /* ── MOBILE ── */
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
+    /* Collapse the full nav to the dropdown early so the bar never clips on tablets/small laptops */
     .nav-links, .nav-phone, .nav-right { display: none; }
     .hamburger { display: flex; margin-left: auto; }
     .nav-inner { height: 88px; gap: 16px; }
     .nav-logo img { height: auto; width: auto; max-height: 50px; max-width: 56vw; }
+  }
+  @media (max-width: 900px) {
     .hero-h1 { font-size: clamp(3.5rem, 14vw, 6rem); }
     .services-grid, .projects-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr 1fr; }
@@ -587,7 +590,9 @@
     section { padding: 72px 0; }
     .services-grid, .projects-grid, .why-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 24px; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+    .facility-sum-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .review-card { flex: 0 0 300px; }
     .booking-ctas { flex-direction: column; align-items: center; }
   }
 
@@ -623,7 +628,7 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo-banner-clean.jpeg" alt="GT WORX">
+      <img src="assets/logo-banner-trim.png" alt="GT WORX">
     </a>
     <nav class="nav-links">
       <a href="index.html" class="nav-link active">Home</a>
@@ -1080,7 +1085,7 @@
 
       <!-- Brand col -->
       <div>
-        <img src="assets/logo-banner-clean.jpeg" alt="GT WORX" class="footer-logo">
+        <img src="assets/logo-banner-trim.png" alt="GT WORX" class="footer-logo">
         <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>

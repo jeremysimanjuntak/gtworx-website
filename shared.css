@@ -302,13 +302,14 @@ body {
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  /* Hide desktop links, phone and the in-bar Book button — the dropdown carries them */
+@media (max-width: 1200px) {
+  /* Collapse the full nav to the dropdown early so the bar never clips on tablets/small laptops */
   .nav-links, .nav-phone, .nav-right { display: none; }
   .hamburger { display: flex; margin-left: auto; }
   .nav-inner { height: 88px; gap: 16px; }
-  /* Banner logo (≈6.5:1) scales to fit — never overflows the bar */
   .nav-logo img { height: auto; width: auto; max-height: 50px; max-width: 56vw; }
+}
+@media (max-width: 900px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 @media (max-width: 640px) {
