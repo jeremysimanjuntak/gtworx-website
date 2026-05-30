@@ -61,6 +61,9 @@
     background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto;
   }
   .ham-line { display: block; width: 22px; height: 2px; background: #fff; transition: all 250ms; }
+  .nav:has(.mobile-menu.open) .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav:has(.mobile-menu.open) .ham-line:nth-child(2) { opacity: 0; }
+  .nav:has(.mobile-menu.open) .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .mobile-menu {
     display: none; background: #0A0A0A; border-top: 1px solid #1A1A1A;
     padding: 16px 24px 28px; flex-direction: column; gap: 0;
@@ -341,6 +344,21 @@
     content: ''; width: 14px; height: 2px; background: #CC1111; flex-shrink: 0;
   }
 
+  /* ── FACILITY SUMMARY ── */
+  .facility-sum { background: #0A0A0A; border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; padding: 0; overflow: hidden; }
+  .facility-sum-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; }
+  .facility-sum-content { padding: 80px 64px 80px 32px; display: flex; flex-direction: column; justify-content: center; }
+  .facility-sum-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.5rem, 4vw, 3.75rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 1.0; margin-bottom: 20px; }
+  .facility-sum-title span { color: #CC1111; }
+  .facility-sum-body { font-size: 14px; color: #666; line-height: 1.8; max-width: 460px; margin-bottom: 30px; }
+  .facility-sum-stats { display: flex; gap: 36px; flex-wrap: wrap; margin-bottom: 36px; }
+  .facility-sum-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.9rem; font-weight: 800; color: #CC1111; line-height: 1; letter-spacing: 0.02em; }
+  .facility-sum-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-top: 5px; }
+  .facility-sum-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; border-left: 1px solid #1A1A1A; }
+  .facility-sum-photos .fp { position: relative; overflow: hidden; background: #111; }
+  .facility-sum-photos img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms ease; }
+  .facility-sum-photos .fp:hover img { transform: scale(1.05); }
+
   /* ── PROJECTS ── */
   .projects-section { background: #050505; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -544,15 +562,17 @@
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
-    .nav-links, .nav-phone { display: none; }
-    .hamburger { display: flex; }
-    .nav-inner { height: 72px; padding: 0 20px; }
-    .nav-logo img { height: 52px; }
-    .hero-content { padding-top: 104px; }
+    .nav-links, .nav-phone, .nav-right { display: none; }
+    .hamburger { display: flex; margin-left: auto; }
+    .nav-inner { height: 88px; gap: 16px; }
+    .nav-logo img { height: auto; width: auto; max-height: 50px; max-width: 56vw; }
     .hero-h1 { font-size: clamp(3.5rem, 14vw, 6rem); }
     .services-grid, .projects-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr 1fr; }
     .perf-inner { grid-template-columns: 1fr; }
+    .facility-sum-inner { grid-template-columns: 1fr; }
+    .facility-sum-content { padding: 64px 32px; }
+    .facility-sum-photos { border-left: none; border-top: 1px solid #1A1A1A; min-height: 380px; }
     .perf-visual { display: none; }
     .perf-content { padding: 64px 32px; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
@@ -562,21 +582,13 @@
   }
   @media (max-width: 640px) {
     .container { padding: 0 20px; }
-    .nav-inner { height: 64px; padding: 0 20px; }
-    .nav-logo img { height: 40px; }
-    section { padding: 64px 0; }
-    .hero-content { padding-top: 88px; padding-bottom: 28px; }
-    .hero-sub { font-size: 14px; }
-    .hero-ctas { flex-direction: column; }
-    .hero-ctas a { justify-content: center; text-align: center; }
-    .hero-stats { gap: 20px; flex-wrap: wrap; }
-    .hero-stat { flex: 1 1 40%; }
+    .nav-inner { padding: 0 20px; height: 72px; }
+    .nav-logo img { max-height: 42px; max-width: 62vw; }
+    section { padding: 72px 0; }
     .services-grid, .projects-grid, .why-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .trust-bar-inner { flex-direction: column; }
-    .trust-item { flex: 1 1 100%; border-right: none; padding: 16px 20px; }
+    .hero-stats { gap: 24px; }
     .booking-ctas { flex-direction: column; align-items: center; }
-    .booking-ctas a { width: 100%; justify-content: center; }
   }
 
   /* ── BRANDS MARQUEE ── */
@@ -825,51 +837,40 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════ PERFORMANCE FEATURE ══════════════════════════════════ -->
-<section class="perf-section" id="facility">
-  <div class="perf-inner">
-    <div class="perf-content container" style="max-width:none;">
-      <div class="perf-tags">
-        <span class="perf-tag">Stage 1</span>
-        <span class="perf-tag">Stage 2</span>
-        <span class="perf-tag">Custom Map</span>
-        <span class="perf-tag">Custom Exhaust</span>
-      </div>
-      <h2 class="perf-title">Remap.<br><span>Unleash.</span><br>Dominate.</h2>
-      <p class="perf-body">
-        Our ECU remapping service extracts the full potential your manufacturer left on the table. Every map is custom-calibrated for your specific vehicle and supporting hardware — not a generic file upload.
+<!-- ══════════════════════════════════ FACILITY SUMMARY ══════════════════════════════════ -->
+<section class="facility-sum" id="facility">
+  <div class="facility-sum-inner">
+    <div class="facility-sum-content container" style="max-width:none;">
+      <span class="section-label-line"></span>
+      <span class="section-eyebrow">The Workshop</span>
+      <h2 class="facility-sum-title">A State-Of-The-Art<br><span>Facility.</span></h2>
+      <p class="facility-sum-body">
+        Every job is carried out in our purpose-built, state-of-the-art workshop. Full-length ramps, professional multi-brand diagnostics, an in-house TIG welding station for custom exhaust fabrication, and a DVSA-approved MOT bay — everything we need to do the job right, under one roof.
       </p>
-      <ul class="perf-list">
-        <li>Stage 1 — bolt-on gains, no hardware mods required</li>
-        <li>Stage 2 — matched to your upgraded hardware</li>
-        <li>Custom maps for track, race, and flex-fuel builds</li>
-        <li>Pair with custom exhaust fabrication for a complete build</li>
-      </ul>
-      <a href="book.html" class="btn-primary" style="align-self:flex-start;">
-        Book a Remap
+      <div class="facility-sum-stats">
+        <div>
+          <div class="facility-sum-stat-num">DVSA</div>
+          <div class="facility-sum-stat-label">Approved MOT Bay</div>
+        </div>
+        <div>
+          <div class="facility-sum-stat-num">TIG</div>
+          <div class="facility-sum-stat-label">In-House Fabrication</div>
+        </div>
+        <div>
+          <div class="facility-sum-stat-num">Multi</div>
+          <div class="facility-sum-stat-label">Brand Diagnostics</div>
+        </div>
+      </div>
+      <a href="facility.html" class="btn-primary" style="align-self:flex-start;">
+        Tour the Facility
         <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
       </a>
     </div>
-    <div class="perf-visual">
-      <div class="perf-visual-bg"></div>
-      <div class="perf-visual-stat-grid">
-        <div class="perf-stat-cell">
-          <div class="perf-stat-num">+40<span style="font-size:1.5rem;">%</span></div>
-          <div class="perf-stat-label">Power Gain</div>
-        </div>
-        <div class="perf-stat-cell">
-          <div class="perf-stat-num">+60<span style="font-size:1.5rem;">%</span></div>
-          <div class="perf-stat-label">Torque Gain</div>
-        </div>
-        <div class="perf-stat-cell">
-          <div class="perf-stat-num">200<span style="font-size:1.5rem;">+</span></div>
-          <div class="perf-stat-label">Cars Remapped</div>
-        </div>
-        <div class="perf-stat-cell">
-          <div class="perf-stat-num">1<span style="font-size:1.5rem;">:1</span></div>
-          <div class="perf-stat-label">Custom Calibration</div>
-        </div>
-      </div>
+    <div class="facility-sum-photos">
+      <div class="fp"><img src="assets/facility-01-workshop.jpg" alt="GT WORX workshop floor with car on two-post lift"></div>
+      <div class="fp"><img src="assets/facility-08-diagnostics.jpg" alt="Diagnostics station and wheel-alignment bay"></div>
+      <div class="fp"><img src="assets/facility-07-welding.jpg" alt="In-house welding and fabrication station"></div>
+      <div class="fp"><img src="assets/facility-05-bay.jpg" alt="Main workshop bay with ramps"></div>
     </div>
   </div>
 </section>
@@ -890,14 +891,14 @@
       <div class="project-card">
         <div class="project-img" style="background:#161010;">
           <div class="project-img-inner">
-            <div class="project-placeholder">M3</div>
+            <img src="assets/project-m3-g80.jpg" alt="BMW M3 Competition G80" style="width:100%;height:100%;object-fit:cover;object-position:center 70%;">
           </div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">BMW <span>M3 E92</span></div>
-          <div class="project-work">Stage 2 Remap · Decat · KW Coilovers</div>
+          <div class="project-car">BMW <span>M3 Competition G80</span></div>
+          <div class="project-work">Stage 2 Build · Custom Map · Decat · KW Coilovers</div>
           <a href="projects.html" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
       </div>
@@ -905,7 +906,7 @@
       <div class="project-card">
         <div class="project-img" style="background:#101616;">
           <div class="project-img-inner">
-            <div class="project-placeholder">GTR</div>
+            <img src="assets/project-gtr-r35.jpg" alt="Nissan GT-R R35" style="width:100%;height:100%;object-fit:cover;object-position:center 55%;">
           </div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
@@ -920,14 +921,14 @@
       <div class="project-card">
         <div class="project-img" style="background:#141016;">
           <div class="project-img-inner">
-            <div class="project-placeholder">ST</div>
+            <img src="assets/project-m4-comp-g82.jpg" alt="BMW M4 Competition G82" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
           </div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">Ford <span>Focus ST MK3</span></div>
-          <div class="project-work">Stage 1 Remap · Performance Exhaust · Intake</div>
+          <div class="project-car">BMW <span>M4 Competition G82</span></div>
+          <div class="project-work">Custom Exhaust · Fabrication · Install</div>
           <a href="projects.html" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
       </div>

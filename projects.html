@@ -37,6 +37,33 @@
   .projects-section { padding: 64px 0; background: #000; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
+  /* INSTAGRAM CTA */
+  .projects-ig-cta {
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    margin-top: 44px; padding: 32px 40px;
+    background: #0D0D0D; border: 1px solid #1E1E1E; border-radius: 8px;
+    text-decoration: none; transition: border-color 220ms, background 220ms, box-shadow 220ms;
+  }
+  .projects-ig-cta:hover { border-color: #CC1111; background: #110d0d; box-shadow: 0 10px 40px rgba(204,17,17,0.16); }
+  .projects-ig-cta .ig-icon { width: 46px; height: 46px; color: #CC1111; flex-shrink: 0; transition: transform 220ms; }
+  .projects-ig-cta:hover .ig-icon { transform: scale(1.1); }
+  .ig-text { display: flex; flex-direction: column; gap: 4px; }
+  .ig-text .ig-line {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1; text-transform: uppercase;
+    letter-spacing: 0.04em; color: #fff;
+  }
+  .ig-text .ig-handle {
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em; color: #CC1111;
+  }
+  .projects-ig-cta .ig-arrow { width: 28px; height: 28px; color: #CC1111; flex-shrink: 0; transition: transform 220ms; }
+  .projects-ig-cta:hover .ig-arrow { transform: translateX(6px); }
+  @media (max-width: 640px) {
+    .projects-ig-cta { flex-direction: column; gap: 14px; text-align: center; padding: 30px 24px; }
+    .ig-text { align-items: center; }
+  }
+
   /* LARGE FEATURED CARD */
   .project-card-featured {
     grid-column: span 2;
@@ -141,12 +168,12 @@
 
       <div class="project-card-featured" data-category="performance remap">
         <div class="project-img" style="background:#140a0a;">
-          <div class="project-img-inner"><div class="project-placeholder">M3</div></div>
+          <div class="project-img-inner"><img src="assets/project-m3-g80.jpg" alt="BMW M3 G80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 70%;"></div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">BMW <span>M3 E92</span></div>
+          <div class="project-car">BMW <span>M3 Competition G80</span></div>
           <div class="project-work">Full Stage 2 build — custom ECU map, decat, KW coilovers, big brake kit. Substantial real-world power gain over stock.</div>
           <div class="project-tags">
             <span class="project-tag">Stage 2 Remap</span>
@@ -160,7 +187,7 @@
 
       <div class="project-card" data-category="performance remap">
         <div class="project-img" style="background:#0a1414;">
-          <div class="project-img-inner"><div class="project-placeholder">GTR</div></div>
+          <div class="project-img-inner"><img src="assets/project-gtr-r35.jpg" alt="Nissan GT-R R35" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;"></div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
@@ -176,37 +203,37 @@
         </div>
       </div>
 
-      <div class="project-card" data-category="performance remap">
+      <div class="project-card" data-category="performance">
         <div class="project-img" style="background:#10100a;">
-          <div class="project-img-inner"><div class="project-placeholder">ST</div></div>
+          <div class="project-img-inner"><img src="assets/project-a45s-amg.jpg" alt="Mercedes-AMG A45 S" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;"></div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">Ford <span>Focus ST MK3</span></div>
-          <div class="project-work">Stage 1 remap, performance exhaust, cold air intake.</div>
+          <div class="project-car">Mercedes-AMG <span>A45 S</span></div>
+          <div class="project-work">Custom exhaust installation and fabrication — full bespoke system built and fitted in-house.</div>
           <div class="project-tags">
-            <span class="project-tag">Stage 1 Remap</span>
-            <span class="project-tag">Exhaust</span>
-            <span class="project-tag">Intake</span>
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
+            <span class="project-tag">Install</span>
           </div>
           <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
       </div>
 
-      <div class="project-card" data-category="performance remap">
+      <div class="project-card" data-category="performance">
         <div class="project-img" style="background:#0a0a14;">
-          <div class="project-img-inner"><div class="project-placeholder">RS3</div></div>
+          <div class="project-img-inner"><img src="assets/project-cayman-s-987.jpg" alt="Porsche Cayman S 987" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;"></div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">Audi <span>RS3 8V</span></div>
-          <div class="project-work">Stage 2 remap, downpipe, intake. 430bhp on pump fuel.</div>
+          <div class="project-car">Porsche <span>Cayman S 987</span></div>
+          <div class="project-work">Custom exhaust installation and fabrication — full bespoke system built and fitted in-house.</div>
           <div class="project-tags">
-            <span class="project-tag">Stage 2 Remap</span>
-            <span class="project-tag">Downpipe</span>
-            <span class="project-tag">Intake</span>
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
+            <span class="project-tag">Install</span>
           </div>
           <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
@@ -214,41 +241,90 @@
 
       <div class="project-card" data-category="performance">
         <div class="project-img" style="background:#140e0a;">
-          <div class="project-img-inner"><div class="project-placeholder">GR</div></div>
+          <div class="project-img-inner"><img src="assets/project-m4-comp-g82.jpg" alt="BMW M4 Competition G82" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;"></div>
           <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">Toyota <span>GR Yaris</span></div>
-          <div class="project-work">Stage 1 remap, Bilstein coilovers, big brake upgrade.</div>
+          <div class="project-car">BMW <span>M4 Competition G82</span></div>
+          <div class="project-work">Custom exhaust installation and fabrication — full bespoke system built and fitted in-house.</div>
           <div class="project-tags">
-            <span class="project-tag">Stage 1 Remap</span>
-            <span class="project-tag">Coilovers</span>
-            <span class="project-tag">Brakes</span>
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
+            <span class="project-tag">Install</span>
           </div>
           <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
       </div>
 
-      <div class="project-card" data-category="service">
-        <div class="project-img" style="background:#0d0d0d;">
-          <div class="project-img-inner"><div class="project-placeholder">911</div></div>
-          <span class="project-img-badge" style="background:#444;color:#C8C8C8;">Service</span>
+      <div class="project-card" data-category="performance">
+        <div class="project-img" style="background:#140a0a;">
+          <div class="project-img-inner"><img src="assets/project-evo-viii.jpg" alt="Mitsubishi Lancer Evolution VIII" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;"></div>
+          <span class="project-img-badge">Performance</span>
           <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
         </div>
         <div class="project-body">
-          <div class="project-car">Porsche <span>911 Carrera</span></div>
-          <div class="project-work">Full manufacturer service, IMS bearing inspection, gearbox service.</div>
+          <div class="project-car">Mitsubishi <span>Lancer Evolution VIII</span></div>
+          <div class="project-work">Custom exhaust fabrication — hood-exit exhaust built and fitted in-house.</div>
           <div class="project-tags">
-            <span class="project-tag">Full Service</span>
-            <span class="project-tag">IMS Check</span>
-            <span class="project-tag">Gearbox</span>
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
+            <span class="project-tag">Hood Exit</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance">
+        <div class="project-img" style="background:#0a0a0a;">
+          <div class="project-img-inner"><img src="assets/project-golf-gti.jpg" alt="Volkswagen Golf Mk6 GTI" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;"></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Volkswagen <span>Golf Mk6 GTI</span></div>
+          <div class="project-work">Custom exhaust fabrication and install — full bespoke system built and fitted in-house.</div>
+          <div class="project-tags">
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
+            <span class="project-tag">Install</span>
+          </div>
+          <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="performance">
+        <div class="project-img" style="background:#0a0a0a;">
+          <div class="project-img-inner"><img src="assets/project-golf-mk75-gti.jpg" alt="Volkswagen Golf Mk7.5 GTI" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;"></div>
+          <span class="project-img-badge">Performance</span>
+          <div class="project-overlay"><span class="project-overlay-label">View Project</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-car">Volkswagen <span>Golf Mk7.5 GTI</span></div>
+          <div class="project-work">Diffuser install with custom exhaust fabrication and install — built and fitted in-house.</div>
+          <div class="project-tags">
+            <span class="project-tag">Diffuser</span>
+            <span class="project-tag">Custom Exhaust</span>
+            <span class="project-tag">Fabrication</span>
           </div>
           <a href="#" class="project-link">View Project <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
         </div>
       </div>
 
     </div>
+
+    <a href="https://instagram.com/gt_worx" target="_blank" rel="noopener" class="projects-ig-cta">
+      <svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+      </svg>
+      <span class="ig-text">
+        <span class="ig-line">Click Here To View More Projects</span>
+        <span class="ig-handle">Follow @GT_WORX on Instagram</span>
+      </span>
+      <i data-lucide="arrow-right" class="ig-arrow"></i>
+    </a>
   </div>
 </section>
 

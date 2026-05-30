@@ -57,7 +57,11 @@ body {
   display: none; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto;
 }
-.ham-line { display: block; width: 22px; height: 2px; background: #fff; }
+.ham-line { display: block; width: 22px; height: 2px; background: #fff; transition: transform 250ms, opacity 200ms; }
+/* Hamburger morphs into an X while the dropdown is open (CSS-only, no per-page JS) */
+.nav:has(.mobile-menu.open) .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav:has(.mobile-menu.open) .ham-line:nth-child(2) { opacity: 0; }
+.nav:has(.mobile-menu.open) .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .mobile-menu {
   display: none; background: #0A0A0A; border-top: 1px solid #1A1A1A;
   padding: 16px 24px 28px; flex-direction: column;
@@ -299,18 +303,19 @@ body {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .nav-links, .nav-phone { display: none; }
-  .hamburger { display: flex; }
-  .nav-inner { height: 72px; padding: 0 20px; }
-  .nav-logo img { height: 52px; }
+  /* Hide desktop links, phone and the in-bar Book button — the dropdown carries them */
+  .nav-links, .nav-phone, .nav-right { display: none; }
+  .hamburger { display: flex; margin-left: auto; }
+  .nav-inner { height: 88px; gap: 16px; }
+  /* Banner logo (≈6.5:1) scales to fit — never overflows the bar */
+  .nav-logo img { height: auto; width: auto; max-height: 50px; max-width: 56vw; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 @media (max-width: 640px) {
   .container { padding: 0 20px; }
-  .nav-inner { height: 64px; padding: 0 20px; }
-  .nav-logo img { height: 40px; }
+  .nav-inner { padding: 0 20px; height: 72px; }
+  .nav-logo img { max-height: 42px; max-width: 62vw; }
   .footer-grid { grid-template-columns: 1fr; }
   .booking-ctas { flex-direction: column; align-items: center; }
-  .booking-ctas a { width: 100%; justify-content: center; }
   .footer-bottom { padding: 16px 20px; }
 }

@@ -30,12 +30,10 @@
   .equip-title { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
   .equip-body { font-size: 13px; color: #555; line-height: 1.65; }
 
-  /* FACILITY PHOTO GRID */
-  .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 200px 200px; gap: 4px; border-radius: 6px; overflow: hidden; margin-bottom: 80px; }
-  .photo-cell { background: #111; border: 1px solid #1A1A1A; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  .photo-cell-large { grid-column: span 2; grid-row: span 2; }
-  .photo-cell-label { font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 800; text-transform: uppercase; color: rgba(255,255,255,0.04); letter-spacing: 0.04em; user-select: none; }
-  .photo-placeholder-icon { position: absolute; bottom: 12px; right: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #333; }
+  /* FACILITY PHOTO GRID — masonry columns, full photos shown uncropped */
+  .photo-grid { columns: 3; column-gap: 8px; margin-bottom: 80px; }
+  .photo-cell { break-inside: avoid; margin: 0 0 8px; background: #111; border: 1px solid #1A1A1A; border-radius: 4px; overflow: hidden; }
+  .photo-cell img { width: 100%; height: auto; display: block; }
 
   /* DYNO SECTION */
   .dyno-section { padding: 80px 0; background: #050505; border-top: 1px solid #111; }
@@ -70,15 +68,13 @@
 
   @media (max-width: 900px) {
     .equip-grid { grid-template-columns: 1fr 1fr; }
-    .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .photo-cell-large { grid-column: span 2; }
+    .photo-grid { columns: 2; }
     .dyno-inner { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
     .equip-grid, .team-grid { grid-template-columns: 1fr; }
-    .photo-grid { grid-template-columns: 1fr; }
-    .photo-cell-large { grid-column: span 1; }
+    .photo-grid { columns: 1; }
   }
 </style>
 </head>
@@ -139,16 +135,17 @@
       <h2 class="section-title">Purpose Built</h2>
     </div>
     <div class="photo-grid">
-      <div class="photo-cell photo-cell-large" style="background:#0f0f0f;">
-        <div class="photo-cell-label">WORKSHOP</div>
-        <div class="photo-placeholder-icon">Photography TBC</div>
-      </div>
-      <div class="photo-cell" style="background:#111;"><div class="photo-cell-label">EXHAUST</div></div>
-      <div class="photo-cell" style="background:#0d0d0d;"><div class="photo-cell-label">RAMP</div></div>
-      <div class="photo-cell" style="background:#111;"><div class="photo-cell-label">DIAG</div></div>
-      <div class="photo-cell" style="background:#0d0d0d;"><div class="photo-cell-label">PARTS</div></div>
+      <div class="photo-cell"><img src="assets/facility-01-workshop.jpg" alt="GT WORX workshop floor with car on two-post lift"></div>
+      <div class="photo-cell"><img src="assets/facility-02-brands.jpg" alt="Tool chests and brand wall — Bosch, Mercedes-Benz, Ferrari, Milwaukee"></div>
+      <div class="photo-cell"><img src="assets/facility-03-lift.jpg" alt="Two-post hydraulic lift"></div>
+      <div class="photo-cell"><img src="assets/facility-08-diagnostics.jpg" alt="Diagnostics station and wheel-alignment bay"></div>
+      <div class="photo-cell"><img src="assets/facility-05-bay.jpg" alt="Main workshop bay with ramps"></div>
+      <div class="photo-cell"><img src="assets/facility-06-tools.jpg" alt="Organised spanner and tool wall"></div>
+      <div class="photo-cell"><img src="assets/facility-07-welding.jpg" alt="Welding and fabrication station"></div>
+      <div class="photo-cell"><img src="assets/facility-09-parts.jpg" alt="Parts shelving and tyre stock"></div>
+      <div class="photo-cell"><img src="assets/facility-10-interior.jpg" alt="Workshop interior with lifts and shelving"></div>
+      <div class="photo-cell"><img src="assets/facility-04-floor.jpg" alt="Epoxy workshop floor with drainage channel"></div>
     </div>
-    <p style="font-size:12px;color:#333;font-style:italic;margin-top:-20px;">Photography coming soon — contact @gt_worx on Instagram for current workshop photos.</p>
   </div>
 </section>
 
@@ -274,25 +271,25 @@
     </div>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-photo"><div class="team-photo-placeholder">TBC</div></div>
+        <div class="team-photo"><div class="team-photo-placeholder"><i data-lucide="user" style="width:96px;height:96px;color:#2A2A2A;"></i></div></div>
         <div class="team-body">
-          <div class="team-name">Team Member</div>
+          <div class="team-name">Weis</div>
           <div class="team-role">Lead Technician &amp; Mapper</div>
           <p class="team-bio">Team details coming soon. Contact the owner to update with real names, roles, and photos.</p>
         </div>
       </div>
       <div class="team-card">
-        <div class="team-photo"><div class="team-photo-placeholder">TBC</div></div>
+        <div class="team-photo"><div class="team-photo-placeholder"><i data-lucide="user" style="width:96px;height:96px;color:#2A2A2A;"></i></div></div>
         <div class="team-body">
-          <div class="team-name">Team Member</div>
+          <div class="team-name">Ovi</div>
           <div class="team-role">MOT Tester &amp; Technician</div>
           <p class="team-bio">DVSA-qualified MOT tester with experience across all vehicle classes.</p>
         </div>
       </div>
       <div class="team-card">
-        <div class="team-photo"><div class="team-photo-placeholder">TBC</div></div>
+        <div class="team-photo"><div class="team-photo-placeholder"><i data-lucide="user" style="width:96px;height:96px;color:#2A2A2A;"></i></div></div>
         <div class="team-body">
-          <div class="team-name">Team Member</div>
+          <div class="team-name">Mauro</div>
           <div class="team-role">Performance Specialist</div>
           <p class="team-bio">Suspension, brakes, exhausts and full performance builds.</p>
         </div>
