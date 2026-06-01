@@ -68,11 +68,8 @@
   @keyframes livepulse { 0%,100% { box-shadow: 0 0 0 3px rgba(204,17,17,0.18);} 50% { box-shadow: 0 0 0 6px rgba(204,17,17,0); } }
 
   /* IFRAME WRAPPER */
-  /* Tall enough for Setmore's tallest step (calendar + time slots) so the
-     widget never shows its own inner scrollbar. Cross-origin iframes can't
-     be measured, so we size generously instead. */
-  .widget-frame-wrap { position: relative; background: #fff; min-height: 2420px; }
-  .widget-frame { width: 100%; min-height: 2420px; height: 100%; border: 0; display: block; }
+  .widget-frame-wrap { position: relative; background: #fff; min-height: 820px; }
+  .widget-frame { width: 100%; min-height: 820px; height: 100%; border: 0; display: block; }
   .widget-loading { position: absolute; inset: 0; background: #0A0A0A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; pointer-events: none; transition: opacity 300ms; }
   .widget-loading.hidden { opacity: 0; }
   .widget-spinner { width: 32px; height: 32px; border: 2px solid #1A1A1A; border-top-color: #CC1111; border-radius: 50%; animation: spin 800ms linear infinite; }
@@ -107,29 +104,6 @@
     box-shadow: 0 0 24px rgba(204,17,17,0.35) !important;
   }
 
-  /* OVERLAY-POPUP CTA PANEL (Book A) */
-  .book-cta { position: relative; background: radial-gradient(circle at 50% 0%, #141414 0%, #0A0A0A 60%); overflow: hidden; }
-  .book-cta-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 70%); pointer-events: none; }
-  .book-cta-inner { position: relative; max-width: 560px; margin: 0 auto; padding: 88px 32px 92px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .book-cta-icon { width: 78px; height: 78px; border-radius: 8px; background: rgba(204,17,17,0.08); border: 1px solid rgba(204,17,17,0.22); display: flex; align-items: center; justify-content: center; margin-bottom: 26px; }
-  .book-cta-title { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: #fff; line-height: 1; margin-bottom: 16px; }
-  .book-cta-sub { font-size: 14px; color: #888; line-height: 1.65; max-width: 440px; margin-bottom: 32px; text-wrap: pretty; }
-  .book-cta-btn { padding: 16px 34px !important; font-size: 13px !important; letter-spacing: 0.16em !important; }
-  .book-cta-meta { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; margin-top: 30px; }
-  .book-cta-meta span { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #666; }
-
-  /* Widen + deepen Setmore's overlay popup so the full time list is visible */
-  .anywhere-box {
-    max-width: 1120px !important;
-    width: 94vw !important;
-  }
-  .anywhere-iframe {
-    width: 100% !important;
-    height: 88vh !important;
-    min-height: 760px !important;
-    max-height: 940px !important;
-  }
-
   /* TRUST STRIP */
   .trust-strip { background: #050505; border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; padding: 32px 0; }
   .trust-row { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
@@ -143,14 +117,13 @@
     .steps-horizontal, .alt-horizontal { grid-template-columns: 1fr; gap: 12px; }
     .steps-horizontal .step-row, .alt-horizontal .alt-row { flex-direction: row; gap: 14px; padding: 10px 0; border-bottom: 1px solid #111; }
     .steps-horizontal .step-row:last-child, .alt-horizontal .alt-row:last-child { border-bottom: none; }
+    .widget-frame-wrap, .widget-frame { min-height: 720px; }
   }
   @media (max-width: 600px) {
     .book-main-head { padding: 22px; flex-direction: column; align-items: flex-start; }
     .book-fallback { padding: 16px 22px; flex-direction: column; align-items: stretch; }
     .book-fallback .anywhere-book-now-button { width: 100%; justify-content: center; }
-    .book-cta-inner { padding: 60px 22px 64px; }
-    .book-cta-title { font-size: 2rem; }
-    .book-cta-meta { gap: 14px; }
+    .widget-frame-wrap, .widget-frame { min-height: 620px; }
   }
 </style>
 </head>
@@ -276,33 +249,38 @@
           <span class="book-main-badge">Live</span>
         </div>
 
-        <!-- OVERLAY POPUP CTA — Setmore opens on top of the site, no inner scroll -->
-        <div class="book-cta">
-          <div class="book-cta-grid"></div>
-          <div class="book-cta-inner">
-            <div class="book-cta-icon">
-              <i data-lucide="calendar-clock" style="width:34px;height:34px;color:#CC1111;"></i>
-            </div>
-            <div class="book-cta-title">Open the booking calendar</div>
-            <div class="book-cta-sub">Live availability for MOTs, servicing, ECU remapping, diagnostics and repairs. The calendar opens right here on this page — you never leave GT WORX.</div>
-
-            <!-- Setmore "anywhere book now" overlay -->
-            <script id="anywhere_book_now_script" src="https://assets.setmore.com/integration/book-now/live/v1/anywhere-book-now.js"></script>
-            <button
-              id="Anywhere_button_iframe"
-              class="book-cta-btn anywhere-book-now-button"
-              data-booking-url="https://jeremyzw8i.setmore.com"
-              data-new-tab="false">
-              <i data-lucide="calendar" style="width:16px;height:16px;"></i>
-              Book Your Appointment
-            </button>
-
-            <div class="book-cta-meta">
-              <span><i data-lucide="check" style="width:13px;height:13px;color:#CC1111;"></i> Stays on gtworx.co.uk</span>
-              <span><i data-lucide="zap" style="width:13px;height:13px;color:#CC1111;"></i> Instant confirmation</span>
-              <span><i data-lucide="clock" style="width:13px;height:13px;color:#CC1111;"></i> Takes about 60 seconds</span>
-            </div>
+        <!-- EMBEDDED SETMORE BOOKING PAGE -->
+        <div class="widget-frame-wrap">
+          <div class="widget-loading" id="widget-loading">
+            <div class="widget-spinner"></div>
+            <div class="widget-loading-text">Loading availability…</div>
           </div>
+          <iframe
+            id="setmore-iframe"
+            class="widget-frame"
+            src="https://jeremyzw8i.setmore.com"
+            title="GT WORX online booking"
+            loading="lazy"
+            allow="payment; clipboard-write"
+            onload="document.getElementById('widget-loading').classList.add('hidden');"
+          ></iframe>
+        </div>
+
+        <!-- FALLBACK / ALTERNATIVE: open in popup -->
+        <div class="book-fallback">
+          <div class="book-fallback-text">
+            <strong>Calendar not loading?</strong> Open the booking page directly.
+          </div>
+          <!-- Setmore "anywhere book now" widget — opens overlay popup -->
+          <script id="anywhere_book_now_script" src="https://assets.setmore.com/integration/book-now/live/v1/anywhere-book-now.js"></script>
+          <button
+            id="Anywhere_button_iframe"
+            class="anywhere-book-now-button"
+            data-booking-url="https://jeremyzw8i.setmore.com"
+            data-new-tab="false">
+            <i data-lucide="calendar" style="width:14px;height:14px;"></i>
+            Open Booking Page
+          </button>
         </div>
 
       </div>
