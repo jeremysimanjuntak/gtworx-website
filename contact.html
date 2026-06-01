@@ -206,7 +206,7 @@
         <div class="form-title">Book an Appointment</div>
         <p class="form-sub">Tell us about your car and what you need. We'll come back to you within 24 hours to confirm availability and pricing.</p>
 
-        <form id="booking-form" onsubmit="handleSubmit(event)">
+        <form id="booking-form" action="https://formspree.io/f/xzdwldad" method="POST">
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="fname">First Name *</label>
@@ -341,13 +341,6 @@
     if (row.querySelector('span:first-child').textContent === today) row.classList.add('today');
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = document.getElementById('booking-form');
-    const success = document.getElementById('form-success');
-    form.style.display = 'none';
-    success.classList.add('show');
-  }
 </script>
 <script src="assets/brands-strip.js"></script>
 </body>
