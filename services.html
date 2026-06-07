@@ -86,6 +86,7 @@
   .svc-bg-service { background-image: url('assets/svc-service.jpg'); }
   .svc-bg-diag { background-image: url('assets/svc-diag.jpg'); }
   .svc-bg-repair { background-image: url('assets/svc-repair.jpg'); }
+  .svc-bg-cat { background-image: url('assets/svc-cat.jpg'); }
   .svc-card:hover .svc-card-accent { opacity: 1; }
   .svc-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
   .svc-icon-wrap {
@@ -224,11 +225,13 @@
             <div class="svc-icon-wrap svc-icon-red"><i data-lucide="zap" style="width:24px;height:24px;color:#CC1111;"></i></div>
             <span class="svc-badge badge-red">Performance</span>
             <div class="svc-title">ECU Remapping</div>
-            <p class="svc-desc">Stage 1, Stage 2 and custom maps for most petrol and diesel vehicles. Safe, road-tested calibration with full diagnostic logging.</p>
+            <p class="svc-desc">Stage 1, Stage 2 and custom maps for most petrol and diesel vehicles. Safe, road-tested calibration with full diagnostic logging. DPF and AdBlue modifications also available.</p>
             <ul class="svc-features">
               <li>Stage 1 — no hardware mods required</li>
               <li>Stage 2 — matched to your upgraded hardware</li>
               <li>Custom maps for track and race builds</li>
+              <li>DPF modifications</li>
+              <li>AdBlue (SCR) modifications</li>
               <li>Pre- and post-map diagnostic logging</li>
               <li>Most petrol and diesel vehicles supported</li>
             </ul>
@@ -268,9 +271,12 @@
             <div class="svc-icon-wrap svc-icon-red"><i data-lucide="flame" style="width:24px;height:24px;color:#CC1111;"></i></div>
             <span class="svc-badge badge-red">Performance</span>
             <div class="svc-title">Custom Exhaust Fabrication</div>
-            <p class="svc-desc">Resonator deletes, backbox deletes, custom midpipes and full bespoke systems. TIG-welded in-house in mild steel or stainless.</p>
+            <p class="svc-desc">Resonator deletes, backbox deletes and modifications, OPF deletes, flexipipe replacements, custom midpipes and full bespoke systems. TIG-welded in-house in mild steel or stainless.</p>
             <ul class="svc-features">
               <li>Resonator and backbox deletes</li>
+              <li>Back box modifications</li>
+              <li>OPF deletes</li>
+              <li>Flexipipe replacements</li>
               <li>Custom midpipes and Y-pipes</li>
               <li>Full bespoke systems from scratch</li>
               <li>Mild steel and stainless welding</li>
@@ -297,9 +303,9 @@
             <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="shield-check" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
             <span class="svc-badge badge-chrome">Everyday</span>
             <div class="svc-title">MOT Testing</div>
-            <p class="svc-desc">DVSA-approved testing station for Class 4 and Class 7 vehicles. Book your slot online.</p>
+            <p class="svc-desc">DVSA-approved testing station for Class 4 vehicles. Book your slot online.</p>
             <ul class="svc-features">
-              <li>Class 4 and Class 7 vehicles</li>
+              <li>Class 4 vehicles</li>
               <li>Same-day results</li>
               <li>Advisory report with every test</li>
               <li>Free retest within 10 working days</li>
@@ -375,6 +381,28 @@
           </div>
         </div>
 
+        <div class="svc-card has-bg svc-bg-cat">
+          <div class="svc-card-accent"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap svc-icon-chrome"><i data-lucide="wrench" style="width:24px;height:24px;color:#C8C8C8;"></i></div>
+            <span class="svc-badge badge-chrome">Everyday</span>
+            <div class="svc-title">Catalytic Converter Repair</div>
+            <p class="svc-desc">In-house repair and reconditioning of catalytic converters — gas-tight welding and structural work to restore a failed or damaged unit rather than replace it.</p>
+            <ul class="svc-features">
+              <li>Exhaust gas-tight shell welding</li>
+              <li>Heat shield re-securing</li>
+              <li>Flange &amp; pipe joint reinforcement</li>
+              <li>Structural bracket reattachment</li>
+              <li>Case clamping &amp; stabilization</li>
+            </ul>
+            <div class="svc-price">
+              <span class="svc-price-from">POA</span>
+              <span class="svc-price-num" style="font-size:1.5rem;color:#555;">Quote on request</span>
+            </div>
+            <a href="contact.html" class="svc-link">Get a Quote <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -418,6 +446,11 @@
           <td>From £55</td>
         </tr>
         <tr>
+          <td>Catalytic Converter Repair <span class="pt-badge">Everyday</span></td>
+          <td>Gas-tight shell welding, heat shield, bracket &amp; joint repair</td>
+          <td>Quote on request</td>
+        </tr>
+        <tr>
           <td>Stage 1 Remap <span class="pt-badge">Performance</span></td>
           <td>ECU tune, custom calibration, full diagnostic logs</td>
           <td>From £250</td>
@@ -428,8 +461,13 @@
           <td>From £350</td>
         </tr>
         <tr>
+          <td>DPF / AdBlue Modifications <span class="pt-badge">Performance</span></td>
+          <td>DPF and AdBlue (SCR) modifications with diagnostic logging</td>
+          <td>Quote on request</td>
+        </tr>
+        <tr>
           <td>Custom Exhaust Fabrication <span class="pt-badge">Performance</span></td>
-          <td>Resonator/backbox deletes, custom midpipes, bespoke systems</td>
+          <td>Resonator/backbox deletes &amp; mods, OPF deletes, flexipipe replacements, custom midpipes, bespoke systems</td>
           <td>Quote on request</td>
         </tr>
         <tr>
@@ -452,7 +490,7 @@
       <p class="booking-sub">Tell us what you need and we'll come back to you within 24 hours.</p>
       <div class="booking-ctas">
         <a href="book.html" class="btn-primary"><i data-lucide="calendar" style="width:15px;height:15px;"></i>Book an Appointment</a>
-        <a href="#" class="btn-whatsapp"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
+        <a href="https://wa.me/447415555269" class="btn-whatsapp" target="_blank" rel="noopener"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
       </div>
     </div>
   </div>
