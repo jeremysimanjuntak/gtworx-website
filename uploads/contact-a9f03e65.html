@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book / Contact — GT WORX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .page-hero { padding: 160px 0 24px; background: #000 url('assets/banner-contact.jpg') center/cover no-repeat; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%); z-index: 0; }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
+  .page-hero-inner { position: relative; z-index: 1; }
+  .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
+  .page-hero-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #CC1111; }
+  .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 0.95; margin-bottom: 20px; }
+  .page-hero-sub { font-size: 15px; color: #555; line-height: 1.8; max-width: 540px; }
+  .page-hero-bottom-bar { height: 3px; background: #CC1111; }
+
+  /* CONTACT SECTION */
+  .contact-section { padding: 80px 0; background: #000; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: flex-start; }
+
+  /* INFO COLUMN */
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+  .info-block { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 28px; }
+  .info-block-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #CC1111; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .info-block-title::before { content: ''; display: block; width: 14px; height: 1px; background: #CC1111; }
+  .info-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #111; }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-row-icon { width: 32px; height: 32px; background: rgba(204,17,17,0.08); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .info-row-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-bottom: 3px; }
+  .info-row-value { font-size: 14px; color: #999; line-height: 1.4; }
+  .hours-table { width: 100%; }
+  .hours-tr { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #111; font-size: 13px; }
+  .hours-tr:last-child { border-bottom: none; }
+  .hours-tr span:first-child { color: #777; }
+  .hours-tr span:last-child { color: #555; }
+  .hours-tr.today span:first-child { color: #CC1111; font-weight: 600; }
+  .hours-tr.today span:last-child { color: #CC1111; }
+
+  /* FORM */
+  .contact-form-wrap { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 40px; }
+  .form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin-bottom: 8px; }
+  .form-sub { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 32px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group.full { grid-column: span 2; }
+  .form-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #555; }
+  .form-input, .form-select, .form-textarea {
+    background: #111; border: 1px solid #1A1A1A; border-radius: 4px;
+    padding: 12px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: #fff; outline: none; transition: border-color 200ms, box-shadow 200ms;
+    width: 100%;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: #CC1111; box-shadow: 0 0 0 2px rgba(204,17,17,0.1);
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: #333; }
+  .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  .form-select option { background: #111; color: #fff; }
+  .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+  .form-disclaimer { font-size: 11px; color: #333; line-height: 1.6; margin-bottom: 20px; }
+  .form-submit { width: 100%; padding: 15px; background: #CC1111; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; border: none; border-radius: 4px; cursor: pointer; transition: background 200ms, box-shadow 200ms; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .form-submit:hover { background: #E01515; box-shadow: 0 0 24px rgba(204,17,17,0.35); }
+  .form-success { display: none; background: rgba(204,17,17,0.05); border: 1px solid rgba(204,17,17,0.2); border-radius: 4px; padding: 20px; text-align: center; }
+  .form-success.show { display: block; }
+  .form-success-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
+  .form-success-body { font-size: 13px; color: #666; }
+
+  /* WHATSAPP CTA */
+  .wa-block { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .wa-text-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .wa-text-sub { font-size: 12px; color: #555; }
+  .btn-wa-large { padding: 11px 24px; background: transparent; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; border-radius: 4px; border: 1px solid #2A2A2A; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: all 200ms; }
+  .btn-wa-large:hover { border-color: #CC1111; color: #CC1111; }
+
+  @media (max-width: 900px) {
+    .contact-inner { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+    .wa-block { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-trim.png" alt="GT WORX"></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="facility.html" class="nav-link">Facility</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <a href="book.html" class="nav-link">Book</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone"><i data-lucide="phone" style="width:13px;height:13px;"></i><span>0800 GT WORX</span></div>
+      <a href="book.html" class="btn-book">Book Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="services.html" class="mobile-link">Services</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="facility.html" class="mobile-link">Facility</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="contact.html" class="mobile-link active">Contact</a>
+    <a href="book.html" class="mobile-link">Book</a>
+    <a href="book.html" class="mobile-cta">Book an Appointment</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="page-hero-pre"><span class="page-hero-rule"></span><span class="page-hero-eyebrow">GT WORX</span></div>
+    <h1 class="page-hero-title">Book an<br><span style="color:#CC1111;">Appointment</span></h1>
+    <p class="page-hero-sub">Fill in the form and we'll confirm your slot within 24 hours.</p>
+  </div>
+  <div class="page-hero-bottom-bar"></div>
+</div>
+
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+
+      <!-- INFO -->
+      <div class="contact-info">
+
+        <div class="info-block">
+          <div class="info-block-title">Get In Touch</div>
+          <div class="info-row">
+            <div class="info-row-icon"><i data-lucide="phone" style="width:15px;height:15px;color:#CC1111;"></i></div>
+            <div>
+              <div class="info-row-label">Phone</div>
+              <div class="info-row-value">0800 GT WORX</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-row-icon"><i data-lucide="mail" style="width:15px;height:15px;color:#CC1111;"></i></div>
+            <div>
+              <div class="info-row-label">Email</div>
+              <div class="info-row-value">info@gtworx.co.uk</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-row-icon"><i data-lucide="map-pin" style="width:15px;height:15px;color:#CC1111;"></i></div>
+            <div>
+              <div class="info-row-label">Location</div>
+              <div class="info-row-value">Address TBC — update when confirmed</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-row-icon"><i data-lucide="instagram" style="width:15px;height:15px;color:#CC1111;"></i></div>
+            <div>
+              <div class="info-row-label">Instagram</div>
+              <div class="info-row-value">@gt_worx</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-title">Opening Hours</div>
+          <div class="hours-table">
+            <div class="hours-tr today"><span>Monday</span><span>8:00am – 6:00pm</span></div>
+            <div class="hours-tr"><span>Tuesday</span><span>8:00am – 6:00pm</span></div>
+            <div class="hours-tr"><span>Wednesday</span><span>8:00am – 6:00pm</span></div>
+            <div class="hours-tr"><span>Thursday</span><span>8:00am – 6:00pm</span></div>
+            <div class="hours-tr"><span>Friday</span><span>8:00am – 6:00pm</span></div>
+            <div class="hours-tr"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+            <div class="hours-tr"><span>Sunday</span><span>Closed</span></div>
+          </div>
+        </div>
+
+        <div class="wa-block">
+          <div>
+            <div class="wa-text-title">Prefer to message?</div>
+            <p class="wa-text-sub">WhatsApp us directly for quick questions and quotes.</p>
+          </div>
+          <a href="https://wa.me/447415555269" class="btn-wa-large" target="_blank" rel="noopener">
+            <i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>
+            WhatsApp Us
+          </a>
+        </div>
+
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form-wrap">
+        <div class="form-title">Book an Appointment</div>
+        <p class="form-sub">Tell us about your car and what you need. We'll come back to you within 24 hours to confirm availability and pricing.</p>
+
+        <form id="booking-form" action="https://formspree.io/f/xzdwldad" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">First Name *</label>
+              <input class="form-input" type="text" id="fname" name="fname" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lname">Last Name *</label>
+              <input class="form-input" type="text" id="lname" name="lname" placeholder="Smith" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone *</label>
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="07700 000000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email *</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="make">Vehicle Make *</label>
+              <input class="form-input" type="text" id="make" name="make" placeholder="BMW" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="model">Model &amp; Year *</label>
+              <input class="form-input" type="text" id="model" name="model" placeholder="M3 E92 2010" required>
+            </div>
+            <div class="form-group full" style="grid-column:span 2;">
+              <label class="form-label" for="service">Service Required *</label>
+              <select class="form-select" id="service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <optgroup label="Performance">
+                  <option>ECU Remapping — Stage 1</option>
+                  <option>ECU Remapping — Stage 2</option>
+                  <option>Custom / Track Map</option>
+                  <option>Custom Exhaust Fabrication</option>
+                  <option>Performance Upgrade</option>
+                </optgroup>
+                <optgroup label="Everyday">
+                  <option>MOT Test</option>
+                  <option>Interim Service</option>
+                  <option>Full Service</option>
+                  <option>Diagnostics</option>
+                  <option>General Repair</option>
+                </optgroup>
+                <option>Other — please describe below</option>
+              </select>
+            </div>
+            <div class="form-group full" style="grid-column:span 2;">
+              <label class="form-label" for="notes">Additional Notes</label>
+              <textarea class="form-textarea" id="notes" name="notes" placeholder="Tell us more — any existing mods, specific goals, mileage, known issues..."></textarea>
+            </div>
+          </div>
+          <p class="form-disclaimer">By submitting this form you agree to us contacting you to discuss your enquiry. We'll never share your details or spam you.</p>
+          <button type="submit" class="form-submit">
+            <i data-lucide="send" style="width:15px;height:15px;"></i>
+            Send Enquiry
+          </button>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <div class="form-success-title">Enquiry Received</div>
+          <p class="form-success-body">Thanks — we'll be in touch within 24 hours to confirm your appointment details.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-accent"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-banner-trim.png" alt="GT WORX" class="footer-logo">
+        <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
+          <a href="#" class="social-pill">FB</a>
+          <a href="#" class="social-pill">YT</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="facility.html" class="footer-link">Facility</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="book.html" class="footer-link">Book Now</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href="services.html" class="footer-link">ECU Remapping</a>
+          <a href="services.html" class="footer-link">MOT Testing</a>
+          <a href="services.html" class="footer-link">Servicing</a>
+          <a href="services.html" class="footer-link">Performance Upgrades</a>
+          <a href="services.html" class="footer-link">Diagnostics</a>
+          <a href="services.html" class="footer-link">General Repairs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-row"><i data-lucide="phone" style="width:14px;height:14px;"></i><span>0800 GT WORX</span></div>
+        <div class="footer-contact-row"><i data-lucide="mail" style="width:14px;height:14px;"></i><span>info@gtworx.co.uk</span></div>
+        <div class="footer-contact-row"><i data-lucide="map-pin" style="width:14px;height:14px;"></i><span>Location TBC</span></div>
+        <div class="footer-hours">
+          <div class="footer-hours-title">Opening Hours</div>
+          <div class="footer-hours-row"><span>Mon – Fri</span><span>8:00am – 6:00pm</span></div>
+          <div class="footer-hours-row"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+          <div class="footer-hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid #0F0F0F;"><div class="footer-bottom"><span>© 2026 GT WORX. All rights reserved.</span><span class="footer-sep">·</span><a href="#" class="footer-legal">Privacy Policy</a><span class="footer-sep">·</span><span class="footer-disclaimer">Performance tuning for off-road use only where applicable</span></div></div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('open'); });
+  window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40); });
+
+  // Highlight today
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const today = days[new Date().getDay()];
+  document.querySelectorAll('.hours-tr').forEach(row => {
+    row.classList.remove('today');
+    if (row.querySelector('span:first-child').textContent === today) row.classList.add('today');
+  });
+
+</script>
+<script src="assets/brands-strip.js"></script>
+</body>
+</html>

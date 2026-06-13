@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — GT WORX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .page-hero { padding: 160px 0 24px; background: #000 url('assets/banner-about.jpg') center/cover no-repeat; border-bottom: 1px solid #1A1A1A; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.55) 100%); z-index: 0; }
+  .page-hero-grid { position: absolute; inset: 0; opacity: 0.04; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
+  .page-hero-inner { position: relative; z-index: 1; }
+  .page-hero-pre { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .page-hero-rule { display: block; width: 28px; height: 2px; background: #CC1111; }
+  .page-hero-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #CC1111; }
+  .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 0.95; margin-bottom: 20px; }
+  .page-hero-sub { font-size: 15px; color: #555; line-height: 1.8; max-width: 540px; }
+  .page-hero-bottom-bar { height: 3px; background: #CC1111; }
+
+  /* STORY */
+  .story-section { padding: 80px 0; background: #000; }
+  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .story-visual { position: relative; }
+  .story-img-frame { background: #0D0D0D; border: 1px solid #1A1A1A; border-radius: 6px; padding: 48px; display: flex; align-items: center; justify-content: center; min-height: 380px; overflow: hidden; }
+  .story-img-frame-label { font-family: 'Barlow Condensed', sans-serif; font-size: 7rem; font-weight: 800; text-transform: uppercase; color: rgba(255,255,255,0.03); letter-spacing: 0.04em; user-select: none; text-align: center; }
+  .story-img-badge {
+    position: absolute; bottom: -16px; right: 24px;
+    background: #CC1111; color: #fff; border-radius: 4px; padding: 16px 24px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.04em; text-align: center;
+  }
+  .story-img-badge span { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; color: rgba(255,255,255,0.7); }
+  .story-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 1.05; margin-bottom: 20px; }
+  .story-title span { color: #CC1111; }
+  .story-body { font-size: 14px; color: #666; line-height: 1.85; margin-bottom: 16px; }
+  .story-quote { border-left: 2px solid #CC1111; padding-left: 20px; margin: 28px 0; }
+  .story-quote p { font-size: 16px; font-style: italic; color: #999; line-height: 1.7; }
+  .story-quote cite { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-top: 8px; font-style: normal; }
+
+  /* VALUES */
+  .values-section { padding: 80px 0; background: #050505; border-top: 1px solid #111; }
+  .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .value-card { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 32px; transition: border-color 220ms; }
+  .value-card:hover { border-color: #2A2A2A; }
+  .value-num { font-family: 'Barlow Condensed', sans-serif; font-size: 4rem; font-weight: 800; color: rgba(204,17,17,0.15); letter-spacing: 0.02em; line-height: 1; margin-bottom: 14px; }
+  .value-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .value-body { font-size: 13.5px; color: #555; line-height: 1.7; }
+
+  /* CREDENTIALS */
+  .creds-section { padding: 80px 0; background: #000; border-top: 1px solid #111; }
+  .creds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #1A1A1A; border: 1px solid #1A1A1A; border-radius: 6px; overflow: hidden; }
+  .cred-item { background: #0A0A0A; padding: 28px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .cred-icon { width: 40px; height: 40px; background: rgba(204,17,17,0.08); border: 1px solid rgba(204,17,17,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .cred-title { font-size: 13px; font-weight: 600; color: #fff; }
+  .cred-body { font-size: 12px; color: #444; line-height: 1.55; }
+
+  /* REVIEWS STRIP */
+  .reviews-section { padding: 80px 0; background: #050505; border-top: 1px solid #111; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review-card { background: #0A0A0A; border: 1px solid #1A1A1A; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: border-color 220ms; }
+  .review-card:hover { border-color: #2A2A2A; }
+  .review-stars { display: flex; gap: 3px; }
+  .review-quote { font-size: 14px; color: #666; line-height: 1.75; font-style: italic; flex: 1; }
+  .review-author { font-size: 13px; font-weight: 600; color: #999; }
+  .review-source { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #333; margin-top: 2px; }
+
+  @media (max-width: 900px) {
+    .story-inner { grid-template-columns: 1fr; gap: 48px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .creds-grid { grid-template-columns: 1fr 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .creds-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-banner-trim.png" alt="GT WORX"></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="facility.html" class="nav-link">Facility</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="book.html" class="nav-link">Book</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone"><i data-lucide="phone" style="width:13px;height:13px;"></i><span>0800 GT WORX</span></div>
+      <a href="book.html" class="btn-book">Book Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="services.html" class="mobile-link">Services</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="facility.html" class="mobile-link">Facility</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="book.html" class="mobile-link">Book</a>
+    <a href="book.html" class="mobile-cta">Book an Appointment</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="page-hero-pre"><span class="page-hero-rule"></span><span class="page-hero-eyebrow">GT WORX</span></div>
+    <h1 class="page-hero-title">About<br><span style="color:#CC1111;">GT WORX</span></h1>
+    <p class="page-hero-sub">We build, tune, and maintain performance cars. We've been doing it for over 10 years, and we still care about every single job.</p>
+  </div>
+  <div class="page-hero-bottom-bar"></div>
+</div>
+
+<!-- ── BRANDS WE SERVICE ── -->
+<div id="brands-strip"></div>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-inner">
+      <div class="story-visual">
+        <div class="story-img-frame">
+          <div class="story-img-frame-label">GT<br>WORX</div>
+        </div>
+        <div class="story-img-badge">
+          10+<span>Years Experience</span>
+        </div>
+      </div>
+      <div>
+        <span class="section-label-line"></span>
+        <span class="section-eyebrow">Our Story</span>
+        <h2 class="story-title">Built on<br><span>Passion.</span></h2>
+        <p class="story-body">GT WORX is an independent workshop specialising in performance modifications alongside everyday servicing and MOT work. The workshop was set up around custom exhaust fabrication and multi-brand diagnostic capability.</p>
+        <p class="story-body">Day-to-day work covers ECU remapping, full and interim servicing, MOT testing, diagnostics and general mechanical repairs. Performance builds — from Stage 1 maps to full Stage 2 hardware — make up a regular share of the workshop's output.</p>
+        <a href="contact.html" class="btn-primary"><i data-lucide="arrow-right" style="width:15px;height:15px;"></i>Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label-line"></span>
+      <span class="section-eyebrow">What We Stand For</span>
+      <h2 class="section-title">How We Work</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <div class="value-title">Itemised Quotes</div>
+        <p class="value-body">Parts and labour are quoted separately before any work starts. Additional work found during a job is quoted and authorised before it's carried out.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <div class="value-title">In-House Capability</div>
+        <p class="value-body">Diagnostics, exhaust fabrication, welding and most mechanical work is handled on-site. Vehicles are rarely sent to third parties.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <div class="value-title">Performance Specialism</div>
+        <p class="value-body">Stage 1, Stage 2 and custom ECU mapping are a regular part of the workshop's output. Supporting hardware — exhausts, intercoolers, brakes — is specified and fitted in-house.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <div class="value-title">All Makes</div>
+        <p class="value-body">Workshop services cover petrol and diesel vehicles across most makes — see the brands strip above for what we routinely work on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="creds-section">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="section-label-line"></span>
+      <span class="section-eyebrow">Qualifications</span>
+      <h2 class="section-title">Accreditations</h2>
+    </div>
+    <div class="creds-grid">
+      <div class="cred-item">
+        <div class="cred-icon"><i data-lucide="shield-check" style="width:18px;height:18px;color:#CC1111;"></i></div>
+        <div class="cred-title">DVSA Approved</div>
+        <p class="cred-body">Officially approved MOT testing station for Class 4 vehicles.</p>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><i data-lucide="zap" style="width:18px;height:18px;color:#CC1111;"></i></div>
+        <div class="cred-title">ECU Mapping</div>
+        <p class="cred-body">Professionally trained and experienced in all major mapping platforms and ECU types.</p>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><i data-lucide="wrench" style="width:18px;height:18px;color:#CC1111;"></i></div>
+        <div class="cred-title">IMI Qualified</div>
+        <p class="cred-body">Institute of the Motor Industry trained technicians on staff.</p>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><i data-lucide="star" style="width:18px;height:18px;color:#CC1111;"></i></div>
+        <div class="cred-title">4.9★ Rated</div>
+        <p class="cred-body">Average 4.9 stars on Google across customer reviews. See the carousel on the home page for examples.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="section-head-row">
+      <div>
+        <span class="section-label-line"></span>
+        <span class="section-eyebrow">Google Reviews</span>
+        <h2 class="section-title">What They Say</h2>
+      </div>
+      <a href="https://www.google.com/maps/place/GT+WORX/@51.5414236,-0.2917711,17z/data=!4m17!1m8!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!2sGT+WORX!8m2!3d51.5413908!4d-0.2918456!10e5!16s%2Fg%2F11rchhblc6!3m7!1s0x4876132787f7fc97:0x524dd9d6c9e5c4cb!8m2!3d51.5413908!4d-0.2918456!9m1!1b1!16s%2Fg%2F11rchhblc6" target="_blank" rel="noopener" class="link-all">All Reviews <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+        </div>
+        <p class="review-quote">"Can't recommend GT WORX enough. Top-quality work every single time with genuinely friendly and honest service — I've taken all my cars there over the years because I trust them completely."</p>
+        <div><div class="review-author">Ridge V.</div><div class="review-source">Google Review</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+        </div>
+        <p class="review-quote">"Best garage I've used in years. Booked the MOT online, dropped it off, got it back same day. No drama, passed first time."</p>
+        <div><div class="review-author">Sarah M.</div><div class="review-source">Google Review</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+          <i data-lucide="star" style="width:13px;height:13px;color:#CC1111;fill:#CC1111;"></i>
+        </div>
+        <p class="review-quote">"Stage 2 on my M3 — these guys are proper car people. They'll tell you exactly what you need and nothing you don't."</p>
+        <div><div class="review-author">Ryan T.</div><div class="review-source">Google Review</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING BANNER -->
+<section class="booking-section">
+  <div class="container">
+    <div class="booking-inner">
+      <span class="booking-eyebrow">Work With Us</span>
+      <h2 class="booking-title">Let's Talk<br>About Your Car.</h2>
+      <p class="booking-sub">Tell us what your car needs and we'll come back within 24 hours.</p>
+      <div class="booking-ctas">
+        <a href="book.html" class="btn-primary"><i data-lucide="calendar" style="width:15px;height:15px;"></i>Book an Appointment</a>
+        <a href="#" class="btn-whatsapp"><i data-lucide="message-circle" style="width:15px;height:15px;color:#CC1111;"></i>WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-accent"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-banner-trim.png" alt="GT WORX" class="footer-logo">
+        <p class="footer-tagline">Performance. Precision.<br>GT WORX.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/gt_worx" target="_blank" class="social-pill">@GT_WORX</a>
+          <a href="#" class="social-pill">FB</a>
+          <a href="#" class="social-pill">YT</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="facility.html" class="footer-link">Facility</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="book.html" class="footer-link">Book Now</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href="services.html" class="footer-link">ECU Remapping</a>
+          <a href="services.html" class="footer-link">MOT Testing</a>
+          <a href="services.html" class="footer-link">Servicing</a>
+          <a href="services.html" class="footer-link">Performance Upgrades</a>
+          <a href="services.html" class="footer-link">Diagnostics</a>
+          <a href="services.html" class="footer-link">General Repairs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-row"><i data-lucide="phone" style="width:14px;height:14px;"></i><span>0800 GT WORX</span></div>
+        <div class="footer-contact-row"><i data-lucide="mail" style="width:14px;height:14px;"></i><span>info@gtworx.co.uk</span></div>
+        <div class="footer-contact-row"><i data-lucide="map-pin" style="width:14px;height:14px;"></i><span>Location TBC</span></div>
+        <div class="footer-hours">
+          <div class="footer-hours-title">Opening Hours</div>
+          <div class="footer-hours-row"><span>Mon – Fri</span><span>8:00am – 6:00pm</span></div>
+          <div class="footer-hours-row"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+          <div class="footer-hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid #0F0F0F;"><div class="footer-bottom"><span>© 2026 GT WORX. All rights reserved.</span><span class="footer-sep">·</span><a href="#" class="footer-legal">Privacy Policy</a><span class="footer-sep">·</span><span class="footer-disclaimer">Performance tuning for off-road use only where applicable</span></div></div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('open'); });
+  window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40); });
+</script>
+<script src="assets/brands-strip.js"></script>
+</body>
+</html>

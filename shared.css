@@ -173,8 +173,11 @@ body {
   border-radius: 4px; font-size: 10px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.08em; color: #555;
   text-decoration: none; transition: border-color 200ms, color 200ms;
+  display: inline-flex; align-items: center; justify-content: center;
 }
 .social-pill:hover { border-color: #CC1111; color: #CC1111; }
+.social-icon { padding: 9px; }
+.social-icon svg { width: 15px; height: 15px; display: block; fill: currentColor; }
 .footer-col-title {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.14em; color: #CC1111; margin-bottom: 18px;
